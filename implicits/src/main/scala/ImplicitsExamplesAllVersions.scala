@@ -1,54 +1,18 @@
-object ImplicitsExamples extends App {
+object ImplicitsExamplesAllVersions {
 
   //------------------ Implicit Conversions ---------------
 
-  val HELLO = "hello".toAllUpper
+  "hello".toAllUpper
 
-
-
-
-
-
-  class RichString(val str: String) {
+  class RichString(str: String) {
     def toAllUpper = str.toUpperCase
   }
-
   implicit def string2RichString(str: String): RichString = new RichString(str)
+  //implicit def string2RichString(str: String): Object = new RichString(str)
 
-
-
-
-
-  def takeRichString(rs: RichString) { rs.length }
-
-  implicit def richString2String(rs: RichString): String = rs.str
-
-  takeRichString("hello")
-
-
-
-
-
+  string2RichString("hello").toAllUpper
 
   //-------------------- Implicit Parameters --------------
-
-
-
-  trait Converter { def doConversion(d: Double): Double }
-
-  def euro2dollar(eur: Double)(implicit converter: Converter) = {
-    converter.doConversion(eur)
-  }
-
-  val dollar = euro2dollar(2.0)
-
-
-
-
-  implicit val euro2DollarConverter: Converter = new Converter {
-    def doConversion(d: Double) = d * 1.1
-  }
-
 
 
 
@@ -60,16 +24,21 @@ object ImplicitsExamples extends App {
     override def isOrdered(a1: Int, a2: Int): Boolean = if(a1 < a2) true else false
   }
 
-  def orderPairList[A](list: List[(A,A)])(implicit cp: Comparator[A]) = {
+  //def orderPairList[A](list: List[(A,A)])(implicit cp: Comparator[A]) = {
+  def orderPairList[A : Comparator](list: List[(A,A)]) = {
     for { pair <- list } yield orderPair(pair)
   }
 
   def orderPair[A](pair: (A, A))(implicit cp: Comparator[A]) = {
     if(cp.isOrdered(pair._1, pair._2)) pair else pair.swap
   }
-
+//  def orderPair[A : Comparator](pair: (A, A)) = {
+//    if(implicitly[Comparator[A]].isOrdered(pair._1, pair._2)) pair else pair.swap
+//  }
 
   println(orderPairList((1,2) :: (2,1) :: Nil))
+
+  println(ImplicitFactorial.test)
 
 
 }
