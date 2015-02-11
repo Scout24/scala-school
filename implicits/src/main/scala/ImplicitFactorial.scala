@@ -1,4 +1,3 @@
-
 object ImplicitFactorial {
   trait Nat
   trait Succ[N<:Nat] <: Nat
