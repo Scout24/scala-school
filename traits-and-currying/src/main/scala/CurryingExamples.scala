@@ -20,7 +20,7 @@ object CurryingExamples {
   def filterByMod2nc(l:Seq[Int]) = l.filter(modNnc(2,_))
 
   def main(args: Array[String]): Unit = {
-    val x = funGen(1, Some("A")) //type inference cannot help here
+    val x: (Any, Some[Any]) = funGen(1, Some("A")) //type inference cannot help here
     //val y = funGenCurried(1)(Some("A")) // correctly shows a compile error
   }
 }
