@@ -33,6 +33,8 @@ object TraitExamples {
     def >=(that: T): Boolean = (this compare that) >= 0
   }
 
+  // -------------- Stackable Modifications ----------------
+
   import scala.collection.mutable.ArrayBuffer
 
   abstract class IntQueue {
@@ -51,6 +53,12 @@ object TraitExamples {
   trait Doubling extends IntQueue {
     abstract override def put(x: Int) { super.put(2 * x) }
   }
+  trait Tripling { self: IntQueue =>
+    def triplePut(x: Int) { this.put(x) }
+  }
+
+
+
 
   def main(args: Array[String]) {
     (new Frog).philosophize()
@@ -59,6 +67,10 @@ object TraitExamples {
     val q = new BasicIntQueue with Incrementing with Doubling
     q.put(42)  // which put would be called?
     println("q [" + q + "]")
+
+    val t = new BasicIntQueue with Tripling
+    t.triplePut(42)  // which put would be called?
+    println("t [" + t + "]")
   }
 
 }
