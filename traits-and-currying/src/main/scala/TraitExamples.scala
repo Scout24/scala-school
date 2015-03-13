@@ -1,3 +1,4 @@
+// Example code based on Programming in Scala, Second Edition by Martin Odersky, Lex Spoon, Bill Venners http://booksites.artima.com/programming_in_scala_2ed
 
 object TraitExamples {
 
