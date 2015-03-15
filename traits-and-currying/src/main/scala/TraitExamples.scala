@@ -47,11 +47,15 @@ object TraitExamples {
     def get() = buf.remove(0)
     def put(x: Int) { buf += x }
   }
+
+  // abstract override
   trait Incrementing extends IntQueue {
     abstract override def put(x: Int) { super.put(x + 1) }
   }
-  trait Doubling extends IntQueue {
-    abstract override def put(x: Int) { super.put(2 * x) }
+
+  // non-abstract override
+  trait Doubling extends BasicIntQueue {
+    override def put(x: Int) { super.put(2 * x) }
   }
 
   // self reference with nominal type
