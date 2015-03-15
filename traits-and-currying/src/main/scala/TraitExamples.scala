@@ -53,24 +53,34 @@ object TraitExamples {
   trait Doubling extends IntQueue {
     abstract override def put(x: Int) { super.put(2 * x) }
   }
+
+  // self reference with nominal type
   trait Tripling { self: IntQueue =>
-    def triplePut(x: Int) { this.put(x) }
+    def triplePut(x: Int) { this.put(3 * x) }
   }
 
+  // self reference with structural type
+  trait Quadrupling { self: { def put(x: Int) } =>
+    def quadruplePut(x: Int) { this.put(4 * x) }
+  }
 
 
 
   def main(args: Array[String]) {
     (new Frog).philosophize()
 
-    // Multiple inheritance thought experiment
-    val q = new BasicIntQueue with Incrementing with Doubling
-    q.put(42)  // which put would be called?
-    println("q [" + q + "]")
+    val d = new BasicIntQueue with Incrementing with Doubling
+    d.put(42)  // which put would be called?
+    println("d [" + d + "]")
 
-    val t = new BasicIntQueue with Tripling
-    t.triplePut(42)  // which put would be called?
+    val t = new BasicIntQueue with Tripling // mixin at instantiation
+    t.triplePut(42)
     println("t [" + t + "]")
+
+    class QuadruplingIntQueue extends BasicIntQueue with Quadrupling // mixin at class definition
+    val q = new QuadruplingIntQueue
+    q.quadruplePut(42)
+    println("q [" + q + "]")
   }
 
 }
