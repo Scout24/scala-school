@@ -2,14 +2,11 @@ object CurryingExamples {
 
   type A = Int
   type B = Option[Int]
-  type C = (Int, Option[Int])
+  type C = (A, B)
 
-  type ABtoC = (A,B) => C
-  type AtoBtoC = A => (B => C)
-
-  def fun(a: A, b: B) = (a,b)
-  def funCurried(a: A) = (b: B) => (a,b)
-  def funCurried2(a: A)(b: B) = (a,b)
+  def fun(a: A, b: B): C = (a,b)
+  def funCurried(a: A): B => C = (b: B) => (a,b)
+  def funCurried2(a: A)(b: B): C = (a,b)
 
   def funGen[T](a: T, b: Some[T]) = (a,b)
   def funGenCurried[T](a: T)(b: Some[T]) = (a,b)
