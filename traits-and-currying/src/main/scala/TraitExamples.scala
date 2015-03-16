@@ -17,7 +17,7 @@ object TraitExamples {
     }
   }
 
-  class Point(x: Int, y: Int)
+  class Point(val x: Int, val y: Int)
   trait CharSequence {
     def charAt(index: Int): Char
     def length: Int
@@ -32,6 +32,13 @@ object TraitExamples {
     def <=(that: T): Boolean = (this compare that) <= 0
     def >=(that: T): Boolean = (this compare that) >= 0
   }
+
+  class MyPoint(x: Int, y: Int) extends Point(x,y) with Ordered[Point] {
+    def compare(that: Point) = (this.x - that.y) + (this.y - that.y)
+  }
+
+  val orderedPointSmall: Point with Ordered[Point] = new MyPoint(1,1)
+  val orderedPointBig: Point with Ordered[Point] = new MyPoint(10,10)
 
   // -------------- Stackable Modifications ----------------
 
@@ -72,6 +79,7 @@ object TraitExamples {
   val queue1 = new BasicIntQueue with Incrementing with Doubling
 
   def main(args: Array[String]) {
+
     (new Frog).philosophize()
 
     val d = new BasicIntQueue with Incrementing with Doubling
