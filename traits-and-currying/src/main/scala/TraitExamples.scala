@@ -69,6 +69,7 @@ object TraitExamples {
   }
 
 
+  val queue1 = new BasicIntQueue with Incrementing with Doubling
 
   def main(args: Array[String]) {
     (new Frog).philosophize()
