@@ -1,3 +1,5 @@
+package currying
+
 object CurryingExamples {
 
   type A = Int

@@ -1,3 +1,5 @@
+package currying
+
 import org.scalatest._
 
 class CurryingTests extends FlatSpec with MustMatchers {

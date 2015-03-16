@@ -1,13 +1,8 @@
-import org.scalatest._
-import TraitExamples._
+package traits
 
-class TraitTests extends FlatSpec with MustMatchers {
+import org.scalatest.{MustMatchers, FlatSpec}
 
-  // Exercise - Part 1
-  "small ordered point" should "be smaller than big ordered point" in {
-    (orderedPointSmall < orderedPointBig) must be(true)
-  }
-
+class QueueTests extends FlatSpec with MustMatchers {
   // Exercise - Part 2
   "queue 1" should "turn a 3 into a 7" in {
     val queue1 : IntQueue = ???
@@ -29,5 +24,4 @@ class TraitTests extends FlatSpec with MustMatchers {
     queue3.get must be === 4
     queue3.get must be === 14
   }
-
 }
