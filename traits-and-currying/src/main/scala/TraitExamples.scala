@@ -28,17 +28,20 @@ object TraitExamples {
     def compare(that: T): Int
 
     def <(that: T): Boolean = (this compare that) < 0
-    def >(that: T): Boolean = (this compare that) > 0
-    def <=(that: T): Boolean = (this compare that) <= 0
-    def >=(that: T): Boolean = (this compare that) >= 0
+    def >(that: T): Boolean = ???
+    def <=(that: T): Boolean = ???
+    def >=(that: T): Boolean = ???
   }
 
-  class MyPoint(x: Int, y: Int) extends Point(x,y) with Ordered[Point] {
-    def compare(that: Point) = (this.x - that.y) + (this.y - that.y)
-  }
+  val orderedPointSmall: Point with Ordered[Point] = ???
+//    new Point(1,1) with Ordered[Point] {
+//    def compare(that: Point) = (this.x - that.y) + (this.y - that.y)
+//  }
 
-  val orderedPointSmall: Point with Ordered[Point] = new MyPoint(1,1)
-  val orderedPointBig: Point with Ordered[Point] = new MyPoint(10,10)
+//  class MyPoint(x: Int, y: Int) extends Point(x,y) with Ordered[Point] {
+//    def compare(that: Point) = (this.x - that.y) + (this.y - that.y)
+//  }
+  val orderedPointBig: Point with Ordered[Point] = ??? //new MyPoint(10,10)
 
   // -------------- Stackable Modifications ----------------
 
