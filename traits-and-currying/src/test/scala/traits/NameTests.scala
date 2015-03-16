@@ -26,23 +26,15 @@ class NameTests extends FlatSpec with MustMatchers {
   }
 
   "firstInitials" should "initial all but the last name" in {
-    pending // uncomment the following assertions and remove this line
-//        assert(odersky.firstInitials === "M. Odersky")
-//        assert(kennedy.firstInitials === "J.F. Kennedy")
-//        assert(tolkien.firstInitials === "J.R.R. Tolkien")
+    assert(odersky.firstInitials === "M. Odersky")
+    assert(kennedy.firstInitials === "J.F. Kennedy")
+    assert(tolkien.firstInitials === "J.R.R. Tolkien")
   }
 
   "middleInitials" should "initial only middle names" in {
-    pending // uncomment the following assertions and remove this line
-    //    assert(odersky.middleInitials === "Martin Odersky")
-    //    assert(kennedy.middleInitials === "John F. Kennedy")
-    //    assert(tolkien.middleInitials === "John R.R. Tolkien")
+    assert(odersky.middleInitials === "Martin Odersky")
+    assert(kennedy.middleInitials === "John F. Kennedy")
+    assert(tolkien.middleInitials === "John R.R. Tolkien")
   }
 
-  "single stage names" should "be treated like last names" in {
-    pending // uncomment the following assertions and remove this line
-    //    assert(beyonce.initials === "B.")
-    //    assert(beyonce.firstInitials === "Beyonce")
-    //    assert(beyonce.middleInitials === "Beyonce")
-  }
 }

@@ -12,10 +12,10 @@ trait Initiallable {
 
   def initials = toString.toUpperCase()
 
-  def combine = ???
+  private def combineInitials = ???
 
-  def firstInitials = ???
+  def firstInitials: String = ???
 
-  def middleInitials = ???
+  def middleInitials: String = ???
 
 }
