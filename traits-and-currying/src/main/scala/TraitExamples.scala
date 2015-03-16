@@ -16,14 +16,11 @@ object TraitExamples {
       println("It ain't easy being "+ toString +"!")
     }
   }
+  
+  // -------------- Traits Exercise - 1 ----------------
 
   class Point(val x: Int, val y: Int)
-  trait CharSequence {
-    def charAt(index: Int): Char
-    def length: Int
-    def subSequence(start: Int, end: Int): CharSequence
-    def toString(): String
-  }
+
   trait Ordered[T] {
     def compare(that: T): Int
 
@@ -68,9 +65,12 @@ object TraitExamples {
     override def put(x: Int) { super.put(2 * x) }
   }
 
-  // self reference with nominal type
-  trait Tripling { self: IntQueue =>
-    def triplePut(x: Int) { this.put(3 * x) }
+  // self referene with nominal type
+  trait Filtering extends IntQueue {
+    self: IntQueue =>
+    def putFiltered(x: Int) {
+      if (x >= 0) this.put(x)
+    }
   }
 
   // self reference with structural type
@@ -78,25 +78,5 @@ object TraitExamples {
     def quadruplePut(x: Int) { this.put(4 * x) }
   }
 
-
-  val queue1 = new BasicIntQueue with Incrementing with Doubling
-
-  def main(args: Array[String]) {
-
-    (new Frog).philosophize()
-
-    val d = new BasicIntQueue with Incrementing with Doubling
-    d.put(42)  // which put would be called?
-    println("d [" + d + "]")
-
-    val t = new BasicIntQueue with Tripling // mixin at instantiation
-    t.triplePut(42)
-    println("t [" + t + "]")
-
-    class QuadruplingIntQueue extends BasicIntQueue with Quadrupling // mixin at class definition
-    val q = new QuadruplingIntQueue
-    q.quadruplePut(42)
-    println("q [" + q + "]")
-  }
 
 }
