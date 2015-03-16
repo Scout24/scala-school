@@ -9,9 +9,13 @@ package traits
  * "J.F. Kennedy" (first initials).
  */
 trait Initiallable {
-  def initials = combine(toString.toUpperCase().split(" "))
 
-  def combine(parts: Array[String]) = parts.foldLeft(".")((aggregate, part) => aggregate + part.head)
+  def initials = toString.toUpperCase()
 
+  def combine = ???
+
+  def firstInitials = ???
+
+  def middleInitials = ???
 
 }
