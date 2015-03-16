@@ -23,8 +23,8 @@ trait Doubling extends BasicIntQueue {
   override def put(x: Int) { super.put(2 * x) }
 }
 
-// self referene with nominal type
-trait Filtering extends IntQueue {
+// self reference with nominal type
+trait Filtering {
   self: IntQueue =>
   def putFiltered(x: Int) {
     if (x >= 0) this.put(x)

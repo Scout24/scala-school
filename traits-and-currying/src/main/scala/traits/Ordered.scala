@@ -2,7 +2,7 @@ package traits
 
 /* Trait defining an ordering between two Object of Generic Type T */
 
-trait OrderedPoint[T] {
+trait Ordered[T] {
 
     /* this is the thin interface */
     def compare(that: T): Int

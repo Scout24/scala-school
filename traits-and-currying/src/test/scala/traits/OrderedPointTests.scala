@@ -4,8 +4,8 @@ import org.scalatest._
 
 class OrderedPointTests extends FlatSpec with MustMatchers {
 
-  val orderedPointSmall: Point = new Point(2,2)
-  val orderedPointBig: Point  = new Point(10,10)
+  val orderedPointSmall: Point with Ordered[Point] = ???
+  val orderedPointBig: Point with Ordered[Point] = ???
 
 
   // Exercise - Part 1
