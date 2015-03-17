@@ -14,6 +14,7 @@ object CurryingExamples {
   val partAppFun: B => C = funCurried(42)
   val result: C = partAppFun(Some(13))
 
+
   // enforcing of type inference order
   def funGen[T](a: T, b: Some[T]) = (a,b)
   def funGenCurried[T](a: T)(b: Some[T]) = (a,b)
