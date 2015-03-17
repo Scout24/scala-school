@@ -5,6 +5,6 @@ package traits
 
 class Point(val x: Int, val y: Int) extends Ordered[Point] {
   /* this is the thin interface */
-  override def compare(that: Point) = ???
+  override def compare(that: Point) = (this.x - that.y) + (this.y - that.y)
 
 }

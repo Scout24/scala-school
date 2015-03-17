@@ -4,7 +4,19 @@ package traits
 
 trait Ordered[T] {
 
-    /* this is the thin interface */
+  /** Result of comparing `this` with operand `that`.
+    *
+    * Implement this method to determine how instances of A will be sorted.
+    *
+    * Returns `x` where:
+    *
+    *   - `x < 0` when `this < that`
+    *
+    *   - `x == 0` when `this == that`
+    *
+    *   - `x > 0` when  `this > that`
+    *
+    */
     def compare(that: T): Int
 
     /* provide a richer interface by implementing these in terms of compare */
