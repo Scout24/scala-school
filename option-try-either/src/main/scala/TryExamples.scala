@@ -1,4 +1,4 @@
-// Examples based on http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html
+// Examples inspired by http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html
 
 import java.io.{InputStream, FileNotFoundException}
 import java.net.{MalformedURLException, URL}
@@ -7,6 +7,30 @@ import scala.io.{BufferedSource, Source}
 
 
 object TryCatch {
+  def parseURL(urlarg: String) = {
+    var url: URL = null
+    try {
+      url = new URL(urlarg)
+    } catch {
+      case m: MalformedURLException => throw m
+    }
+    url
+  }
+
+  def getURLContent(urlarg: String): Iterator[String] = {
+    var lines: Iterator[String] = null
+    try {
+      val url = parseURL(urlarg)
+      val connection = url.openConnection()
+      val is = connection.getInputStream
+      lines = Source.fromInputStream(is).getLines()
+    } catch {
+      case e: FileNotFoundException => Iterator("Requested page does not exist")
+      case e: MalformedURLException => Iterator("Please make sure to enter a valid URL")
+      case _: Throwable => Iterator("An unexpected error has occurred. We are so sorry!")
+    }
+    lines
+  }
 
 }
 
