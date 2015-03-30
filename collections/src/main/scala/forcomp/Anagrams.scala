@@ -26,13 +26,14 @@ object Anagrams {
    */
   val dictionary: List[Word] = loadDictionary
 
-  /** Converts the word into its character occurence list.
+  /** Converts the word into its character occurrence list.
    *  
    *  Note: the uppercase and lowercase version of the character are treated as the
    *  same character, and are represented as a lowercase character in the occurrence list.
    */
   def wordOccurrences(w: Word): Occurrences = {
-//    w.toLowerCase.groupBy(x ⇒ (x, w.toLowerCase.count(y ⇒ y.equals(x)))).keys.toList.sorted
+    w.toLowerCase.groupBy(char ⇒ char).mapValues(_.size).toList.sorted
+    w.toLowerCase.foldLeft(Map[Char, Int]()){ (m, c) => m + (c -> (m.getOrElse(c, 0) + 1)) }.toList.sorted
     w.toLowerCase.map(x ⇒ (x, w.toLowerCase.count(y ⇒ y.equals(x)))).toSet.toList.sorted
   }
 
@@ -90,14 +91,13 @@ object Anagrams {
   def combinations(occurrences: Occurrences): List[Occurrences] = {
     occurrences match {
       case List() => List(List())
-      case head :: tail => {
+      case head :: tail =>
         val tailCombinations = combinations(tail)
         tailCombinations ++
           (for {
             o <- tailCombinations
             i <- 1 to head._2
           } yield (head._1, i) :: o)
-      }
     }
   }
 
@@ -112,11 +112,11 @@ object Anagrams {
    *  and has no zero-entries.
    */
   def subtract(x: Occurrences, y: Occurrences): Occurrences = {
-    val foo = for {
+    val diff = for {
       (char, count) <- x
     } yield (char, count - y.toMap.getOrElse(char,0))
 
-    foo.filter (_._2!=0) sortBy (_._1)
+    diff.filter (_._2!=0).sorted
   }
 
   /** Returns a list of all anagram sentences of the given sentence.
