@@ -77,17 +77,19 @@ object TryFlatMap {
   def parseURL(url: String): Try[URL] = Try(new URL(url))
 
   def getURLContent(urlarg: String): Try[Iterator[String]] = {
-      val url = parseURL(urlarg)
-      val connection = url.flatMap(???)
-      val is = connection.flatMap(???)
-      val source: Try[BufferedSource] = is.map(???)
-      source.map(_.getLines())
+
+    parseURL(urlarg).flatMap( url =>
+      Try(url.openConnection()) flatMap ( connection =>
+        Try(connection.getInputStream) flatMap (is =>
+          Try(Source.fromInputStream(is)) map ( source =>
+            source.getLines()))))
+
   }
 }
 
 // ---------------------------------------------------------
 
-// hint: '<-' translates to flatMap; '=' translates to map
+// hint: '<-' translates to flatMap
 object TryFor {
 
   def parseURL(url: String): Try[URL] = Try(new URL(url))
