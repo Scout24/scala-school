@@ -2,37 +2,36 @@
 
 import java.io.{InputStream, FileNotFoundException}
 import java.net.{URLConnection, MalformedURLException, URL}
+
 import scala.util.{Failure, Success, Try}
 import scala.io.{BufferedSource, Source}
 
 
 object TryCatch {
   def parseURL(urlarg: String) = {
-    var url: URL = null
     try {
-      url = new URL(urlarg)
+      new URL(urlarg)
     } catch {
       case m: MalformedURLException => throw m
     }
-    url
   }
 
   def getURLContent(urlarg: String): Iterator[String] = {
-    var lines: Iterator[String] = null
     try {
       val url = parseURL(urlarg)
       val connection = url.openConnection()
       val is = connection.getInputStream
-      lines = Source.fromInputStream(is).getLines()
+      Source.fromInputStream(is).getLines()
     } catch {
-      case e: FileNotFoundException => Iterator("Requested page does not exist")
-      case e: MalformedURLException => Iterator("Please make sure to enter a valid URL")
-      case _: Throwable => Iterator("An unexpected error has occurred. We are so sorry!")
+      case e: FileNotFoundException => println("Requested page does not exist"); null
+      case e: MalformedURLException => println("Please make sure to enter a valid URL"); null
+      case _: Throwable => println("An unexpected error has occurred. We are so sorry!"); null
     }
-    lines
   }
 
 }
+
+// ---------------------------------------------------------
 
 object TryMatch {
 
@@ -42,7 +41,7 @@ object TryMatch {
     val maybeUrl = parseURL(urlarg)
     val url = maybeUrl match {
       case Success(url) => url
-      case Failure(ex) => throw ex
+      case Failure(ex) => println("Please make sure to enter a valid URL"); null
     }
 
     val maybeConn = ???
@@ -55,6 +54,8 @@ object TryMatch {
     ???
   }
 }
+
+// ---------------------------------------------------------
 
 object TryMap {
 
@@ -69,6 +70,8 @@ object TryMap {
   }
 }
 
+// ---------------------------------------------------------
+
 object TryFlatMap {
 
   def parseURL(url: String): Try[URL] = Try(new URL(url))
@@ -82,21 +85,38 @@ object TryFlatMap {
   }
 }
 
-// explanation: <- translates to flatMap, = translates to map
+// ---------------------------------------------------------
+
+// hint: '<-' translates to flatMap; '=' translates to map
 object TryFor {
+
+  def parseURL(url: String): Try[URL] = Try(new URL(url))
+
+  def getURLContent(url: String): Try[Iterator[String]] =
+    for {
+      url <- Try(???)
+      //...
+      //...
+      //...
+    } yield ???
+}
+
+// ---------------------------------------------------------
+
+object TryRecover {
 
   def parseURL(url: String): Try[URL] = Try(new URL(url))
 
   def getURLContent(url: String): Try[Iterator[String]] =
     (for {
       url <- Try(???)
-      //...
-      //...
-      //...
+    //...
+    //...
+    //...
     } yield ???)
-    .recover {
-      case e: FileNotFoundException => Iterator("Requested page does not exist")
-      case e: MalformedURLException => Iterator("Please make sure to enter a valid URL")
-      case _ => Iterator("An unexpected error has occurred. We are so sorry!")
+      .recover {
+      case e: FileNotFoundException => println("Requested page does not exist"); Iterator("")
+      case e: MalformedURLException => println("Please make sure to enter a valid URL"); Iterator("")
+      case _ => println("An unexpected error has occurred. We are so sorry!"); Iterator("")
     }
 }
