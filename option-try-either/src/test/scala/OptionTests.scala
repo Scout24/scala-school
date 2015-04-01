@@ -12,6 +12,10 @@ class OptionTests extends FlatSpec with MustMatchers {
     OptionExamples.secondListFunction(aList) must be (List(2,3,4,5,6))
   }
 
+  "thirdListFunction" should "return a list of A" in {
+    OptionExamples.thirdListFunction(aList) must be (List(3,4,5))
+  }
+
   "firstOptionFunction" should "return a some of some of A" in {
     OptionExamples.firstOptionFunction(anOption) must be (Some(Some(4)))
   }
@@ -26,6 +30,12 @@ class OptionTests extends FlatSpec with MustMatchers {
 
   "secondOptionFunction" should "also work with None" in {
     OptionExamples.secondOptionFunction(None) must be (None)
+  }
+
+  "thirdOptionFunction" should "filter" in {
+    OptionExamples.thirdOptionFunction(Some(3)) must be (Some(3))
+    OptionExamples.thirdOptionFunction(Some(2)) must be (None)
+    OptionExamples.thirdOptionFunction(None) must be (None)
   }
 
 }
