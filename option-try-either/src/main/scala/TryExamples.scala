@@ -40,18 +40,29 @@ object TryMatch {
   def getURLContent(urlarg: String): Try[Iterator[String]] = {
     val maybeUrl = parseURL(urlarg)
     val url = maybeUrl match {
-      case Success(url) => url
+      case Success(u) => u
       case Failure(ex) => println("Please make sure to enter a valid URL"); null
     }
 
-    val maybeConn = ???
-    val connection: URLConnection = ???
+    val maybeConn = Try(url.openConnection())
+    val connection: URLConnection = maybeConn match {
+      case Success(c) => c
+      case Failure(ex) => println("Something went wrong"); null
+    }
 
-    val maybeIS = ???
-    val is: InputStream = ???
+    val maybeIS = Try(connection.getInputStream)
+    val is: InputStream = maybeIS match {
+      case Success(i) => i
+      case Failure(ex) => println("Something happened"); null
+    }
 
-    val maybeSource = ???
-    ???
+    val maybeSource = Try(Source.fromInputStream(is))
+    val source: Source = maybeSource match {
+      case Success(s) => s
+      case Failure(e) => println("e"); null
+    }
+
+    Try(source.getLines())
   }
 }
 
@@ -63,10 +74,10 @@ object TryMap {
 
   def getURLContent(urlarg: String): Try[Iterator[String]] = {
     parseURL(urlarg)
-      .map(???)
-      .map(???)
-      .map(???)
-      .map(???)
+      .map(_.openConnection())
+      .map(_.getInputStream)
+      .map(Source.fromInputStream)
+      .map(_.getLines())
   }
 }
 
@@ -94,13 +105,13 @@ object TryFor {
 
   def parseURL(url: String): Try[URL] = Try(new URL(url))
 
-  def getURLContent(url: String): Try[Iterator[String]] =
+  def getURLContent(urlarg: String): Try[Iterator[String]] =
     for {
-      url <- Try(???)
-      //...
-      //...
-      //...
-    } yield ???
+      url <- parseURL(urlarg)
+      connection <- Try(url.openConnection())
+      is <- Try(connection.getInputStream)
+      source <- Try(Source.fromInputStream(is))
+    } yield source.getLines()
 }
 
 // ---------------------------------------------------------
@@ -111,14 +122,14 @@ object TryRecover {
 
   def getURLContent(url: String): Try[Iterator[String]] =
     (for {
-      url <- Try(???)
-    //...
-    //...
-    //...
-    } yield ???)
+      url <- parseURL(url)
+      connection <- Try(url.openConnection())
+      is <- Try(connection.getInputStream)
+      source <- Try(Source.fromInputStream(is))
+    } yield source.getLines())
       .recover {
-      case e: FileNotFoundException => println("Requested page does not exist"); Iterator("")
-      case e: MalformedURLException => println("Please make sure to enter a valid URL"); Iterator("")
-      case _ => println("An unexpected error has occurred. We are so sorry!"); Iterator("")
+      case e: FileNotFoundException => println("Requested page does not exist"); null
+      case e: MalformedURLException => println("Please make sure to enter a valid URL"); null
+      case _ => println("An unexpected error has occurred. We are so sorry!"); null
     }
 }

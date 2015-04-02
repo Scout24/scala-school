@@ -25,11 +25,11 @@ class OptionTests extends FlatSpec with MustMatchers {
   }
 
   "firstOptionFunction" should "work with None" in {
-    OptionExamples.firstOptionFunction(None) must be (None)
+    OptionExamples.firstOptionFunction(None) must be (Some(None))
   }
 
   "secondOptionFunction" should "also work with None" in {
-    OptionExamples.secondOptionFunction(None) must be (Some(None))
+    OptionExamples.secondOptionFunction(None) must be (None)
   }
 
   "thirdOptionFunction" should "filter" in {
@@ -37,5 +37,6 @@ class OptionTests extends FlatSpec with MustMatchers {
     OptionExamples.thirdOptionFunction(Some(2)) must be (None)
     OptionExamples.thirdOptionFunction(None) must be (None)
   }
+
 
 }
