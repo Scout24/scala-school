@@ -9,7 +9,7 @@ import tatsuservice.testutils.PlaySpecWrapper
  * You can mock out a whole application including requests, plugins etc.
  * For more information, consult the wiki.
  */
-class AddTest extends PlaySpecWrapper {
+class AddUnitTest extends PlaySpecWrapper {
 
   "Add should compute the addition of two numbers" in {
     val calculator = new Calculator()
