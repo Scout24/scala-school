@@ -17,15 +17,9 @@ libraryDependencies ++= Seq(
 
 /* Exercise 1-a: Create a new SettingKey and SettingValue */
 
-//lazy val helloSetting: SettingKey[String] = ???
-
-//helloSetting := ???
 
 /* Exercise 1-b: Create a new TaskKey and TaskValue */
 
-//lazy val helloTask: TaskKey[Unit] = ???
-
-//helloTask := ???
 
 /* Exercise 2-a: Create a new Test configuration that runs only the Unit tests */
 
