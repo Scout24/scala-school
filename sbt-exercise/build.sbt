@@ -23,7 +23,7 @@ libraryDependencies ++= Seq(
 
 /* Exercise 2-a: Create a new Test configuration that runs only the Unit tests */
 
-lazy val UTest = config("unit") extend (Test)
+lazy val UnitTest = config("unit") extend (Test)
 
 /* Exercise 2-b: Create filters that detect Unit tests and Integration test files */
 
@@ -34,10 +34,10 @@ def unitFilter(name: String): Boolean = ???
 
 lazy val tatsuService: Project = project
   .in(file("."))
-  .configs(UTest)
+  .configs(UnitTest)
   .enablePlugins(PlayScala)
-  .settings(inConfig(UTest)(Defaults.testTasks): _*)
+  .settings(inConfig(UnitTest)(Defaults.testTasks): _*)
   .settings(
     cleanFiles <+= baseDirectory { base => base / "logs" },
-    testOptions in UTest := Seq(Tests.Filter(???))
+    testOptions in UnitTest := Seq(Tests.Filter(???))
   )
