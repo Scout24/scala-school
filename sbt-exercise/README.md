@@ -1,4 +1,4 @@
-Classified Detail Service
+Template Service
 =================================
 
 ### Setup project (on OS X 10.10.2)
