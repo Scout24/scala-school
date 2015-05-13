@@ -1,13 +1,12 @@
 
-organization := "com.autoscout24"
-
-name := "tatsu-service"
-
-val tatsuServiceVersion = Option(System.getenv("GO_PIPELINE_LABEL")).getOrElse("1.0-SNAPSHOT")
-
-version := tatsuServiceVersion
 scalaVersion in ThisBuild := "2.11.6"
 scalacOptions in ThisBuild ++= Seq("-unchecked", "-deprecation", "-feature", "-Xfatal-warnings")
+
+lazy val projectSettings = Seq(
+  organization := "com.autoscout24",
+  name := "tatsu-service",
+  version := Option(System.getenv("GO_PIPELINE_LABEL")).getOrElse("1.0-SNAPSHOT")
+)
 
 libraryDependencies ++= Seq(
   "net.codingwell" %% "scala-guice" % "4.0.0-beta4",
@@ -34,6 +33,7 @@ def unitFilter(name: String): Boolean = ???
 
 lazy val tatsuService: Project = project
   .in(file("."))
+  .settings(projectSettings: _*)
   .configs(UnitTest)
   .enablePlugins(PlayScala)
   .settings(inConfig(UnitTest)(Defaults.testTasks): _*)
