@@ -1,5 +1,4 @@
-// examples taken from http://danielwestheide.com/blog/2012/11/21/the-neophytes-guide-to-scala-part-1-extractors.html
-
+// examples inspired by http://danielwestheide.com/
 object PatternMatching {
 
   trait User {
