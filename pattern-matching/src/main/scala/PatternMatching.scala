@@ -4,7 +4,6 @@ object PatternMatching {
 
   trait User {
     def name: String
-
     def score: Int
   }
 
@@ -16,6 +15,7 @@ object PatternMatching {
 
   class PremiumUser(val name: String, val score: Int) extends User
 
-
   def personalizedGreeting(user: User): String = ???
+
+  def freePremiumForThirdUser(s: Seq[User]): Option[String] = ???
 }
