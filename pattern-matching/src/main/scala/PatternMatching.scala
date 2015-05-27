@@ -17,4 +17,6 @@ object PatternMatching {
   def personalizedGreeting(user: User): String = ???
 
   def freePremiumForThirdUser(s: Seq[User]): Option[String] = ???
+
+  def reverse(s: List[User]): List[User] = ???
 }
