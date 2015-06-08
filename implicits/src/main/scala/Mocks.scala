@@ -1,4 +1,4 @@
 object Mocks {
-  implicit def any2RichString(str: Any): Object {def toAllUpper: String} =  new { def toAllUpper = "NOPE" }
-  implicit def richStringToNull(rs: Any): String =  null.asInstanceOf[String]
+  implicit def anyToRichString(str: Any): Object {def toUpper: String} =  new { def toUpper = "NOPE :(" }
+  implicit def richStringToNull(rs: Any): String = null.asInstanceOf[String]
 }

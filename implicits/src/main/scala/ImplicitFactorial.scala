@@ -22,5 +22,4 @@ object ImplicitFactorial {
   implicit def facN[N<:Nat, R<:Nat, X<:Nat](implicit n: FacN[N,R], x: TimesN[Succ[N],R,X]) = FacN[Succ[N],X]
 
   def fac[N<:Nat, R<:Nat](n:N)(implicit p:FacN[N,R]) = p
-  val test: FacN[_3,_6] = fac(_3) // type parameter R contains the result
 }
