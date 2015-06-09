@@ -1,4 +1,4 @@
-object ImplicitConversions {
+object ImplicitsConversions {
 
   case class RichString(str: String) {
     def toUpper: String = str.toUpperCase
