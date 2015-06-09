@@ -3,6 +3,7 @@ import org.scalatest._
 
 class ImplicitTests extends FlatSpec with MustMatchers {
   "Implicit conversions" should "be used" in {
+    import ImplicitConversions._
     "abcdefg".toUpper must be("ABCDEFG")
   }
 
