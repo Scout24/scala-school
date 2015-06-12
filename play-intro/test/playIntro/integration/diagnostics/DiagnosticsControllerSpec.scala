@@ -1,15 +1,22 @@
 package playIntro.integration.diagnostics
 
-import org.scalatestplus.play.OneAppPerSuite
-import playIntro.testutils.PlaySpecWrapper
-import play.api.test.FakeRequest
+import org.specs2.mutable._
+import org.specs2.runner._
+import org.junit.runner._
 
-class DiagnosticsControllerSpec extends PlaySpecWrapper with OneAppPerSuite {
+import play.api.test._
+import play.api.test.Helpers._
 
-  "heartbeat check should return ok" in {
-    val Some(response) = route(FakeRequest(GET, "/diagnostics/heartbeat"))
+@RunWith(classOf[JUnitRunner])
+class DiagnosticsControllerSpec extends Specification {
 
-    status(response) mustEqual OK
-    contentAsString(response) mustEqual "Ok"
+  "Diagnostics" should {
+
+    "return ok on heartbeat check" in new WithApplication{
+      val heartbeat = route(FakeRequest(GET, "/diagnostics/heartbeat")).get
+
+      status(heartbeat) must equalTo(OK)
+      contentAsString(heartbeat) must equalTo("Ok")
+    }
   }
 }
