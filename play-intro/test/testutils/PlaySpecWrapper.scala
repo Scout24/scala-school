@@ -1,4 +1,4 @@
-package playIntro.testutils
+package testutils
 
 import org.scalatest.OneInstancePerTest
 import org.scalatest.mock.MockitoSugar

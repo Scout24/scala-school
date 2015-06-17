@@ -1,4 +1,4 @@
-package playIntro.unit
+package unit
 
 import models.Calculator
 import org.scalatestplus.play._

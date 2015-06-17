@@ -1,4 +1,4 @@
-package playIntro.integration
+package integration
 
 import org.specs2.matcher.Matcher
 import org.specs2.mutable._
@@ -10,16 +10,8 @@ import play.api.test.Helpers._
 
 import scala.util.matching.Regex
 
-/**
- * Add your spec here.
- * You can mock out a whole application including requests, plugins etc.
- * For more information, consult the wiki.
- */
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
-
-  def resultMessageEn(radius: Double, result: Double) =
-    s"<h2>The circumference of a circle with radius $radius is $result.</h2>".r
 
   "Application" should {
 
@@ -37,17 +29,24 @@ class ApplicationSpec extends Specification {
 
     "not calculate a circumference without a radius" in new WithApplication{
       val circ = route(FakeRequest(GET, "/circumference")).get
-
       status(circ) must equalTo(BAD_REQUEST)
     }
+
+    "calculate the circumference" in new WithApplication{
+      val circ = route(FakeRequest(GET, "/circumference/2")).get
+
+      status(circ) must equalTo(OK)
+      contentType(circ) must beSome.which(_ == "text/html")
+      contentAsString(circ) must contain("12.56637061436")
+    }
+
 
     "render a result page with the calculated circumference" in new WithApplication{
       val circ = route(FakeRequest(GET, "/circumference/2")).get
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "text/html")
-      //contentAsString(circ) must beEqualTo(resultMessageEn(2, 12.56637061436)).ignoreSpace
-      contentAsString(circ) must contain ("The circumference of a circle with radius 2.0 is 12.56637061436")
+      contentAsString(circ) must be matching(resultMessageEn(2.0, 12.56637061436))
     }
 
     "render a german result page with the calculated circumference" in new WithApplication{
@@ -55,7 +54,13 @@ class ApplicationSpec extends Specification {
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "text/html")
-      contentAsString(circ) must contain ("Der Umfang eines Kreises mit Radius 2.0 ist 12.56637061436")
+      contentAsString(circ) must be matching(resultMessageDe(2.0, 12.56637061436))
     }
   }
+
+  def resultMessageEn(radius: Double, result: Double) =
+    s"""(?s)(.*)<h2>(.*)The circumference of a circle with radius $radius is $result(.*)</h2>(.*)""".r
+
+  def resultMessageDe(radius: Double, result: Double) =
+    s"""(?s)(.*)<h2>(.*)Der Umfang eines Kreises mit Radius $radius ist $result(.*)</h2>(.*)""".r
 }

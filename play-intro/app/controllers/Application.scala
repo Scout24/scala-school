@@ -18,7 +18,6 @@ class Application extends Controller {
 
   def circumference(radius: Double) = Action { implicit request =>
     val language = request.getQueryString("language").getOrElse("")
-    //Ok(Html(s"The circumference of a circle with radius $radius is ${calc.circumference(radius)}"))
     Ok(resultPage(radius, language))
   }
 }

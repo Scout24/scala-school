@@ -1,4 +1,4 @@
-@(radius: Double, language: String)
+@(radius: Double, language: String = "en")
 
 @import models.Calculator
 
@@ -9,6 +9,6 @@
         } else {
             The circumference of a circle with radius @radius is @{Calculator.circumference(radius)}.
         }
-        </h2>
+    </h2>
 
 }
