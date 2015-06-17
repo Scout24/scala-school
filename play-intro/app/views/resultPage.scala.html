@@ -1,0 +1,14 @@
+@(radius: Double, language: String)
+
+@import playIntro.calculation.Calculator
+
+@main("Your circumference is...") {
+    <h2>
+        @if(language == "de") {
+            Der Umfang eines Kreises mit Radius @radius ist @{Calculator.circumference(radius)}.
+        } else {
+            The circumference of a circle with radius @radius is @{Calculator.circumference(radius)}.
+        }
+        </h2>
+
+}
