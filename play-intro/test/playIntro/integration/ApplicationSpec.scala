@@ -28,5 +28,11 @@ class ApplicationSpec extends Specification {
       contentType(home) must beSome.which(_ == "text/html")
       contentAsString(home) must contain ("Your new application is ready.")
     }
+
+    "not calculate a circumference without a radius" in new WithApplication{
+      val circ = route(FakeRequest(GET, "/circumference")).get
+
+      status(circ) must equalTo(BAD_REQUEST)
+    }
   }
 }
