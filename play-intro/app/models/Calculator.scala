@@ -1,4 +1,4 @@
-package playIntro.calculation
+package models
 
 object Calculator {
   private val PI = 3.14159265359

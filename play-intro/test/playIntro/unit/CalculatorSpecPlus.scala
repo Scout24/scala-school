@@ -1,7 +1,7 @@
 package playIntro.unit
 
+import models.Calculator
 import org.scalatestplus.play._
-import playIntro.calculation.Calculator
 
 class CalculatorSpecPlus extends PlaySpec {
 

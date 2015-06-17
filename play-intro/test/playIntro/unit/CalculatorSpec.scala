@@ -1,10 +1,9 @@
 package playIntro.unit
 
+import models.Calculator
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
-
-import playIntro.calculation.Calculator
 
 @RunWith(classOf[JUnitRunner])
 class CalculatorSpec extends Specification {

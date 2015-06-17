@@ -1,9 +1,9 @@
-package playIntro.diagnostics
+package controllers
 
-import playIntro.app.Global
+import global.Global
 import play.api.mvc.{Action, Controller}
 
-class DiagnosticsController extends Controller {
+class Diagnostics extends Controller {
 
   def heartbeatCheck = Action(Ok("Ok"))
 

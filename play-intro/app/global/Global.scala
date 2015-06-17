@@ -1,4 +1,4 @@
-package playIntro.app
+package global
 
 import org.joda.time.DateTimeZone
 import play.api.mvc.{RequestHeader, Result, Results}
