@@ -8,8 +8,6 @@ scalacOptions in ThisBuild ++= Seq("-unchecked", "-deprecation", "-feature", "-X
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
   "org.scalatestplus" %% "play" % "1.4.0-M3" % "test",
-  jdbc,
-  cache,
   ws,
   specs2 % Test
 )
