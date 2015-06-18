@@ -11,4 +11,6 @@ class Application extends Controller {
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
   }
+
+  //TODO add your controller methods here
 }
