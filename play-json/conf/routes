@@ -4,9 +4,9 @@
 
 # Home page
 GET        /                             controllers.Application.index
-
-# Circumference calculation
-# TODO add your routes here...
+GET        /circumference                controllers.Application.invalid
+GET        /circumference/:r             controllers.Application.circumference(r: Double)
+GET        /circumferences/$a<[0-9]+>-$b<[0-9]+>   controllers.Application.circumferences(a: Int, b: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
