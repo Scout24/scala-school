@@ -4,7 +4,8 @@
 function loadJson() {
     console.log("loading json...")
     qwest.get('/vehicle', {"responseType": "json", "cache": true}).then(function (response) {
-        document.getElementById("myDiv").innerHTML=JSON.stringify(response);
+        //document.getElementById("myDiv").innerHTML=JSON.stringify(response);
+        document.getElementById("myTextField").value=JSON.stringify(response);
         console.log(JSON.stringify(response))
     });
 }
