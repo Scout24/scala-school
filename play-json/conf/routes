@@ -4,11 +4,8 @@
 
 # Home page
 GET        /                             controllers.Application.index
-GET        /circumference                controllers.Application.invalid
-GET        /circumference/:r             controllers.Application.circumference(r: Double)
 GET        /vehicle                      controllers.Application.nextVehicle
 POST       /vehicle                      controllers.Application.addVehicle
-
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
