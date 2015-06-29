@@ -19,12 +19,12 @@ class JsonTransformer {
 
   def transform(json: JsValue): JsValue = {
     json match {
-      case JsObject(jsPairs) => JsObject(jsPairs.map(element => (element._1, transform(element._2))))
-      case JsArray(jsList) => JsArray(jsList.map(element => transform(Json.toJson(element))))
-      case JsNumber(number) => JsNumber(number * number)
-      case JsString(str) => JsString(str.reverse)
-      case JsBoolean(bool) => JsBoolean(!bool)
-      case JsNull => JsNull
+      case JsNumber(number) => ???
+      case JsString(str) => ???
+      case JsBoolean(bool) => ???
+      case JsNull => ???
+      case JsArray(jsList) => ???
+      case JsObject(jsPairs) => ???
     }
   }
 }
