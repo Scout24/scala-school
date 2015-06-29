@@ -16,10 +16,8 @@ import play.api.libs.json._
 
 
 class JsonTransformer {
-  
-  def transform(json: JsValue): JsValue = _transform(json, List.empty[String])
 
-  private def _transform(json: JsValue, elements: List[String]): JsValue = {
+  def transform(json: JsValue): JsValue = {
     json match {
       case JsObject(jsPairs) => JsObject(jsPairs.map(element => (element._1, transform(element._2))))
       case JsArray(jsList) => JsArray(jsList.map(element => transform(Json.toJson(element))))
