@@ -16,11 +16,18 @@ import play.api.libs.json._
 
 
 class JsonTransformer {
-  def process(input: JsValue) : JsValue = {
-    input match {
-      case JsObject(value) => process(value)
-      case JsNumber(value) => Json.toJson(value * value)
-      case _ => input
+  
+  def transform(json: JsValue): JsValue = _transform(json, List.empty[String])
+
+  private def _transform(json: JsValue, elements: List[String]): JsValue = {
+    json match {
+      case JsObject(jsPairs) => JsObject(jsPairs.map(element => (element._1, transform(element._2))))
+      case JsArray(jsList) => JsArray(jsList.map(element => transform(Json.toJson(element))))
+      case JsNumber(number) => JsNumber(number * number)
+      case JsString(str) => JsString(str.reverse)
+      case JsBoolean(bool) => JsBoolean(!bool)
+      case JsNull => JsNull
     }
   }
 }
+
