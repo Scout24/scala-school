@@ -25,6 +25,12 @@ class Application extends Controller {
   }
 
   def nextVehicle = Action {
-    Ok(Json.toJson(Vehicle.testVehicles(scala.util.Random.nextInt(3))))
+    Ok(Json.toJson(Vehicle.testVehicles(scala.util.Random.nextInt(Vehicle.testVehicles.length))))
+  }
+
+  def addVehicle = Action(parse.json) { request =>
+    val v: Vehicle = request.body.as[Vehicle]
+    Vehicle.testVehicles = v :: Vehicle.testVehicles
+    Ok
   }
 }
