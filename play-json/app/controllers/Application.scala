@@ -1,6 +1,6 @@
 package controllers
 
-import models.Calculator
+import models.{Vehicle, Calculator}
 import play.api._
 import play.api.libs.json.Json
 import play.api.mvc._
@@ -24,9 +24,7 @@ class Application extends Controller {
     Ok(resultPage(r,language))
   }
 
-  def circumferences(a: Int, b: Int) = Action {
-    val rs: Inclusive = a to b
-    val circs = rs.map(Calculator.circumference(_))
-    Ok(Json.toJson(circs))
+  def nextVehicle = Action {
+    Ok(Json.toJson(Vehicle.testVehicles(scala.util.Random.nextInt(3))))
   }
 }
