@@ -3,7 +3,7 @@ package models
 import org.specs2.mutable._
 import play.api.libs.json._
 
-class JsonConverterTest extends Specification {
+class JsonTransformerTest extends Specification {
 
   "The Json Transformer" should {
 
