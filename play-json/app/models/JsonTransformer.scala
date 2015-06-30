@@ -7,7 +7,7 @@ import play.api.libs.json._
  *
  * JsObject :
         JsString  - reverse it
-        JsNumber  - sequare it
+        JsNumber  - square it
         JsBoolean - flip it
         JsNull    - do nothing to it
         JsArray   - recursively apply the transformation to elements in this JsArray
