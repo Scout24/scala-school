@@ -16,13 +16,13 @@ object Vehicle {
   implicit val vehicleWrites = new Writes[Vehicle] {
     import Address._
     //TODO Exercise 2b
-    def writes(v: Vehicle) = ???
+    def writes(v: Vehicle) :  JsValue = ???
   }
 
   implicit val vehicleReads = new Reads[Vehicle] {
     import Address._
     //TODO Exercise 2c
-    def reads(json: JsValue) = ???
+    def reads(json: JsValue) : JsResult[Vehicle] = ???
   }
 
   var testVehicles = List[Vehicle](
