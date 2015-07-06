@@ -1,2 +1,2 @@
 # scala-school
-exercises for the scala school sessions
+Exercises for the scala school sessions
