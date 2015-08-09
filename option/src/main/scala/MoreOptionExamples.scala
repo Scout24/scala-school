@@ -108,9 +108,9 @@ object OptionFor {
   def getURLContent(urlarg: String): Option[Iterator[String]] =
     for {
       url <- parseURL(urlarg)
-      connection <- Try(url.openConnection())
-      is <- Try(connection.getInputStream)
-      source <- Try(Source.fromInputStream(is))
+      connection <- Try(url.openConnection()).toOption
+      is <- Try(connection.getInputStream).toOption
+      source <- Try(Source.fromInputStream(is)).toOption
     } yield source.getLines()
 }
 
