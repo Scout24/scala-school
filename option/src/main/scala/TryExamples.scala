@@ -33,46 +33,46 @@ object TryCatch {
 
 // ---------------------------------------------------------
 
-object TryMatch {
+object OptionMatch {
 
-  def parseURL(url: String): Try[URL] = Try(new URL(url))
+  def parseURL(url: String): Option[URL] = Try(new URL(url)).toOption
 
-  def getURLContent(urlarg: String): Try[Iterator[String]] = {
+  def getURLContent(urlarg: String): Option[Iterator[String]] = {
     val maybeUrl = parseURL(urlarg)
     val url = maybeUrl match {
-      case Success(u) => u
-      case Failure(ex) => println("Please make sure to enter a valid URL"); null
+      case Some(u) => u
+      case None => println("Please make sure to enter a valid URL"); null
     }
 
-    val maybeConn = Try(url.openConnection())
+    val maybeConn = Try(url.openConnection()).toOption
     val connection: URLConnection = maybeConn match {
-      case Success(c) => c
-      case Failure(ex) => println("Something went wrong"); null
+      case Some(c) => c
+      case None => println("Something went wrong"); null
     }
 
-    val maybeIS = Try(connection.getInputStream)
+    val maybeIS = Try(connection.getInputStream).toOption
     val is: InputStream = maybeIS match {
-      case Success(i) => i
-      case Failure(ex) => println("Something happened"); null
+      case Some(i) => i
+      case None => println("Something happened"); null
     }
 
-    val maybeSource = Try(Source.fromInputStream(is))
+    val maybeSource = Try(Source.fromInputStream(is)).toOption
     val source: Source = maybeSource match {
-      case Success(s) => s
-      case Failure(e) => println("e"); null
+      case Some(s) => s
+      case None => println("e"); null
     }
 
-    Try(source.getLines())
+    Try(source.getLines()).toOption
   }
 }
 
 // ---------------------------------------------------------
 
-object TryMap {
+object OptionMap {
 
-  def parseURL(url: String): Try[URL] = Try(new URL(url))
+  def parseURL(url: String): Option[URL] = Try(new URL(url)).toOption
 
-  def getURLContent(urlarg: String): Try[Iterator[String]] = {
+  def getURLContent(urlarg: String): Option[Iterator[String]] = {
     parseURL(urlarg)
       .map(_.openConnection())
       .map(_.getInputStream)
@@ -83,16 +83,16 @@ object TryMap {
 
 // ---------------------------------------------------------
 
-object TryFlatMap {
+object OptionFlatMap {
 
-  def parseURL(url: String): Try[URL] = Try(new URL(url))
+  def parseURL(url: String): Option[URL] = Try(new URL(url)).toOption
 
-  def getURLContent(urlarg: String): Try[Iterator[String]] = {
+  def getURLContent(urlarg: String): Option[Iterator[String]] = {
 
     parseURL(urlarg).flatMap( url =>
-      Try(url.openConnection()) flatMap ( connection =>
-        Try(connection.getInputStream) flatMap (is =>
-          Try(Source.fromInputStream(is)) map ( source =>
+      Try(url.openConnection()).toOption flatMap ( connection =>
+        Try(connection.getInputStream).toOption flatMap (is =>
+          Try(Source.fromInputStream(is)).toOption map ( source =>
             source.getLines()))))
 
   }
@@ -101,11 +101,11 @@ object TryFlatMap {
 // ---------------------------------------------------------
 
 // hint: '<-' translates to flatMap
-object TryFor {
+object OptionFor {
 
-  def parseURL(url: String): Try[URL] = Try(new URL(url))
+  def parseURL(url: String): Option[URL] = Try(new URL(url)).toOption
 
-  def getURLContent(urlarg: String): Try[Iterator[String]] =
+  def getURLContent(urlarg: String): Option[Iterator[String]] =
     for {
       url <- parseURL(urlarg)
       connection <- Try(url.openConnection())
@@ -114,22 +114,3 @@ object TryFor {
     } yield source.getLines()
 }
 
-// ---------------------------------------------------------
-
-object TryRecover {
-
-  def parseURL(url: String): Try[URL] = Try(new URL(url))
-
-  def getURLContent(url: String): Try[Iterator[String]] =
-    (for {
-      url <- parseURL(url)
-      connection <- Try(url.openConnection())
-      is <- Try(connection.getInputStream)
-      source <- Try(Source.fromInputStream(is))
-    } yield source.getLines())
-      .recover {
-      case e: FileNotFoundException => println("Requested page does not exist"); null
-      case e: MalformedURLException => println("Please make sure to enter a valid URL"); null
-      case _ => println("An unexpected error has occurred. We are so sorry!"); null
-    }
-}
