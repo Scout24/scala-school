@@ -1,4 +1,4 @@
-name := """option-try-either"""
+name := """option"""
 
 version := "1.0"
 
