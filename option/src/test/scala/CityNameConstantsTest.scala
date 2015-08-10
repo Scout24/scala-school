@@ -10,6 +10,10 @@ class CityNameConstantsTest extends FlatSpec with MustMatchers {
     cityNameConstants.getUsingMatch('N').get must be("NEW_YORK")
   }
 
+  "CityNameConstants.getUsingMatch" should "not return a constant based on a city that is not in the database" in {
+    cityNameConstants.getUsingMatch('B') must be(None)
+  }
+
   "CityNameConstants.getUsingMatch" should "not return a constant based on a city name that contains an ß" in {
     cityNameConstants.getUsingMatch('S') must be(None)
   }
@@ -23,6 +27,10 @@ class CityNameConstantsTest extends FlatSpec with MustMatchers {
     cityNameConstants.getUsingMap('S') must be(None)
   }
 
+  "CityNameConstants.getUsingMap" should "not return a constant based on a city that is not in the database" in {
+    cityNameConstants.getUsingMap('B') must be(None)
+  }
+
   "CityNameConstants.getUsingFor" should "return a constant identifier given a city name's first letter" in {
     cityNameConstants.getUsingFor('L').get must be("LONDON")
     cityNameConstants.getUsingFor('N').get must be("NEW_YORK")
@@ -30,6 +38,10 @@ class CityNameConstantsTest extends FlatSpec with MustMatchers {
 
   "CityNameConstants.getUsingFor" should "not return a constant based on a city name that contains an ß" in {
     cityNameConstants.getUsingFor('S') must be(None)
+  }
+
+  "CityNameConstants.getUsingFor" should "not return a constant based on a city that is not in the database" in {
+    cityNameConstants.getUsingFor('B') must be(None)
   }
 
 }

@@ -1,3 +1,5 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException
+
 class CityNameConstants(cities: List[String]) {
   val citiesByFirst = cities.map(c => c.head -> c).toMap[Char, String]
 
@@ -6,25 +8,25 @@ class CityNameConstants(cities: List[String]) {
   def getUsingMatch(c: Char): Option[String] = {
     val city = citiesByFirst.get(c)
     val uppercased = city match {
-      case Some(str) => uppercaseGerman(str)
+      case Some(str) => ???
       case None => None
     }
-    uppercased match {
-      case Some(str) => Some(str.replace(' ', '_'))
-      case None => None
-    }
+    ?? // hint: return Some(...replace(' ', '_'))
   }
 
   def getUsingMap(c: Char): Option[String] = {
     val city = citiesByFirst.get(c)
-    val uppercased = city.flatMap(uppercaseGerman)
-    uppercased.map(_.replace(' ', '_'))
+    val uppercased = city.flatMap(???)
+    uppercased.map(???)
   }
 
   def getUsingFor(c: Char): Option[String] = {
     for {
-      city <- citiesByFirst.get(c)
-      uppercased <- uppercaseGerman(city)
-    } yield uppercased.replace(' ', '_')
+      city <- ??
+      uppercased <- ??
+    } yield ???
   }
+
+  // helper to make the exercise compile
+  def ??(): Option[Nothing] = throw new NotImplementedException
 }
