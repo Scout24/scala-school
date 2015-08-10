@@ -1,5 +1,3 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException
-
 class CityNameConstants(cities: List[String]) {
   val citiesByFirst = cities.map(c => c.head -> c).toMap[Char, String]
 
@@ -28,5 +26,5 @@ class CityNameConstants(cities: List[String]) {
   }
 
   // helper to make the exercise compile
-  def ??(): Option[Nothing] = throw new NotImplementedException
+  def ??(): Option[Nothing] = throw new NotImplementedError()
 }
