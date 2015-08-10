@@ -25,7 +25,7 @@ class OptionTests extends FlatSpec with MustMatchers {
   }
 
   "firstOptionFunction" should "work with None" in {
-    OptionExamples.incrementOptionFunction(None) must be (Some(None))
+    OptionExamples.incrementOptionFunction(None) must be (None)
   }
 
   "secondOptionFunction" should "also work with None" in {

@@ -1,7 +1,7 @@
 object OptionExamples {
 
-  val incrementWrapListFunction = { a : Int => List(a + 1) }
-  val incrementWrapOptionFunction = { a : Int => Some(a + 1) }
+  val ListFunction = { a : Int => List(a + 1) }
+  val OptionFunction = { a : Int => Some(a + 1) }
   val filterFunction = { a : Int => a > 2 }
 
   def incrementListFunction(aList: List[Int]): List[List[Int]] = ???
