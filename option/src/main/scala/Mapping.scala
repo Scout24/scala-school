@@ -14,10 +14,19 @@ object Mapping {
     "Luxembourg" -> 0.543)
 
   //implement this first
-  def readMap(string: String): Option[Double] = ???
+  def getPopulationOf(place: String): Option[Double] = populationInMillions.get(place)
 
-  def getPopulationOf(place: String): Double = ???
+  //implement this second
+  def addPopulationsOf(places: String*): Option[Double] = {
+    val maybePopulations: Seq[Option[Double]] = ???
+    maybePopulations.foldLeft(Option(0.0))((aggOpt, opt) => aggOpt match {
+      case _ => ???
+    })
+  }
 
-  def addPopulationsOf(places: String*): Double = ???
+  //implement this third
+  def populationOf(places: String*): Any = addPopulationsOf(places:_*) match {
+    case _ => ???
+  }
 
 }
