@@ -19,7 +19,7 @@ object Mapping {
   //implement this second
   def addPopulationsOf(places: String*): Option[Double] = {
     val maybePopulations: Seq[Option[Double]] = ???
-    maybePopulations.foldLeft(Option(0.0))((aggOpt, opt) => aggOpt match {
+    maybePopulations.foldLeft(Option(0.0))((aggOpt, opt) => opt match {
       case _ => ???
     })
   }
