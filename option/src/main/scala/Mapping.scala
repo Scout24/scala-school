@@ -14,7 +14,7 @@ object Mapping {
     "Luxembourg" -> 0.543)
 
   //implement this first
-  def getPopulationOf(place: String): Option[Double] = populationInMillions.get(place)
+  def getPopulationOf(place: String): Option[Double] = ???
 
   //implement this second
   def addPopulationsOf(places: String*): Option[Double] = {
