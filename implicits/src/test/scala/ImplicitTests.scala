@@ -14,6 +14,7 @@ class ImplicitTests extends FlatSpec with MustMatchers {
   }
 
   "Implicit parameters" should "be used" in {
+    import MathConstants._
     ImplicitParameters.calculateCircumference(2.0) must be(12.5663604976)
   }
 
