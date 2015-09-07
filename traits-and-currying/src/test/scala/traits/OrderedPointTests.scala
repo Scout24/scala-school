@@ -4,11 +4,9 @@ import org.scalatest._
 
 class OrderedPointTests extends FlatSpec with MustMatchers {
 
-  val orderedPointSmall: Point with Ordered[Point] = ???
-  val orderedPointBig: Point with Ordered[Point] = ???
+  import OrderedPoint._
 
-
-  // Exercise - Part 1
+  // Trait Exercise 1
   "small ordered point" should "be smaller than big ordered point" in {
     (orderedPointSmall < orderedPointBig) must be(true)
   }
