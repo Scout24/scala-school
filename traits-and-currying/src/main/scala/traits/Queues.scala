@@ -35,3 +35,15 @@ trait Filtering {
 trait Quadrupling { self: { def put(x: Int) } =>
   def quadruplePut(x: Int) { this.put(4 * x) }
 }
+
+// TODO Traits Exercise 2 - implement different queues using the above traits
+object Queues {
+  // TODO implement a queue that turns a 3 into a 7
+  lazy val queue1: IntQueue = ???
+
+  // TODO implement a queue that turns a 3 into a 8
+  lazy val queue2: IntQueue = ???
+
+  // TODO implement a queue that filters negative numbers and increments non-negative numbers
+  lazy val queue3: IntQueue with Filtering = ???
+}
