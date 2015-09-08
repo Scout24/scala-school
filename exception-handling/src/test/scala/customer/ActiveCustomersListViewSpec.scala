@@ -1,3 +1,5 @@
+package customer
+
 import org.scalatest.{MustMatchers, WordSpec}
 
 class ActiveCustomersListViewSpec extends WordSpec with MustMatchers {

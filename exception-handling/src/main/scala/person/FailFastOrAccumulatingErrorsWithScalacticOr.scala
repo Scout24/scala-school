@@ -1,3 +1,5 @@
+package person
+
 object FailFastOrAccumulatingErrorsWithScalacticOr {
 
   import org.scalactic._

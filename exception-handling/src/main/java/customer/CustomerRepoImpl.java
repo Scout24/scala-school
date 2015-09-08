@@ -1,3 +1,5 @@
+package customer;
+
 public class CustomerRepoImpl implements CustomerRepo {
     @Override
     public String getCustomerName(int id) throws CustomerNotFoundException, CustomerInactiveException {

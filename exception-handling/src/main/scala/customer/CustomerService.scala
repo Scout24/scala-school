@@ -1,3 +1,5 @@
+package customer
+
 import org.scalactic.{Bad, Good, Or}
 
 import scala.util.{Failure, Success, Try}

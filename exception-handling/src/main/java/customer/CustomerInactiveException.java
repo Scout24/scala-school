@@ -1,3 +1,5 @@
+package customer;
+
 public class CustomerInactiveException extends Exception {
     private final int id;
 

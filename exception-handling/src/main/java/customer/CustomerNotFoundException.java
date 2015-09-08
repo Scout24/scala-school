@@ -1,3 +1,5 @@
+package customer;
+
 public class CustomerNotFoundException extends Exception {
     private int id;
 

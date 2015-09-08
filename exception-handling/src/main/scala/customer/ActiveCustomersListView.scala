@@ -1,4 +1,6 @@
-import org.scalactic.{Good, Accumulation}
+package customer
+
+import org.scalactic.Good
 
 import scala.util.{Success, Try}
 

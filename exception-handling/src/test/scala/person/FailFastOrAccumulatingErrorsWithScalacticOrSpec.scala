@@ -1,4 +1,6 @@
-import org.scalactic.{Many, Bad, One, Good}
+package person
+
+import org.scalactic.{Bad, Good, Many, One}
 import org.scalatest.{MustMatchers, WordSpec}
 
 class FailFastOrAccumulatingErrorsWithScalacticOrSpec extends WordSpec with MustMatchers {
