@@ -27,6 +27,6 @@ object CurryingExamples {
   def modN(n: Int)(x: Int) = ((x % n) == 0)
   def filterByMod2(numbers: Seq[Int]): Seq[Int] = ???
 
-  def modNnotCurried(n: Int, x: Int) = ((x % n) == 0)
-  def filterByMod2notCurried(numbers: Seq[Int]): Seq[Int] = ???
+  def modNUncurried(n: Int, x: Int) = ((x % n) == 0)
+  def filterByMod2Uncurried(numbers: Seq[Int]): Seq[Int] = ???
 }
