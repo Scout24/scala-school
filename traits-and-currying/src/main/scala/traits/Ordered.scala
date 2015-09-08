@@ -21,6 +21,7 @@ trait Ordered[T] {
 
   //TODO: Traits Exercise 1 Step 1
   /* provide a richer interface by implementing these in terms of compare */
+
   def <(that: T): Boolean = (this compare that) < 0
 
   def >(that: T): Boolean = ???
@@ -28,5 +29,4 @@ trait Ordered[T] {
   def <=(that: T): Boolean = ???
 
   def >=(that: T): Boolean = ???
-
 }

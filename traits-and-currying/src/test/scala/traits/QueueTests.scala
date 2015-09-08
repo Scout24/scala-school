@@ -18,7 +18,7 @@ class QueueTests extends FlatSpec with MustMatchers {
   }
 
   "queue 3" should "must filter negative numbers and increment non-negative numbers" in {
-    queue3.putFiltered(-3)
+    queue3.putFiltered(-1)
     queue3.putFiltered(3)
     queue3.putFiltered(13)
     queue3.get must be === 4

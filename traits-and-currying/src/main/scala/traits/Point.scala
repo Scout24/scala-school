@@ -9,5 +9,5 @@ class OrderedPoint(x: Int, y: Int) extends Point(x,y) ///...
 // TODO Trait Exercise 1 Step 3: then define a "small" and a "big" point
 object OrderedPoint {
   lazy val orderedPointSmall: Point with Ordered[Point] = ???
-  lazy val orderedPointBig: Point with Ordered[Point] =  ???
+  lazy val orderedPointBig: Point with Ordered[Point] = ???
 }
