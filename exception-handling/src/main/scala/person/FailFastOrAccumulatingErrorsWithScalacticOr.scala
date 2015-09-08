@@ -35,7 +35,7 @@ object FailFastOrAccumulatingErrorsWithScalacticOr {
     } yield Person(name, age)
 
   /**
-   * Implement by returning a Person if both name and age are correct, or a Bad(One(...)) or Bad(Many(...)
+   * Implement by returning a Person if both name and age are correct, or a Bad(One(...)) or Bad(Many(...) in case of error(s)
    *
    * Hint: You can't use a for comprehension to accumulate error messages, since for comprehension is fail fast. Think about using Scalactic's Accumulation.withGood
    */

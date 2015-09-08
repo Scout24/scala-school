@@ -8,10 +8,13 @@ class ActiveCustomersListView(customerService: CustomerService) {
 
   /**
    * Use [[customerService.customerName(id)]] for implementing a Seq of only active & existing customer names for the given customer ids.
+   * I.e. filter out all ids for that the Repo throws it's exceptions.
    *
    * You may freely use try or Try or another method for handling the exceptions of the underlying repo method.
    *
-   * Hint: If you use Try() have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq
+   * Hint: If you use Try() have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
+   * Remember with pattern matching you may define a partial function!
+   *
    * TODO gist for collect
    *
    * Do you see the burden that is put on the client when using Exceptions for "business return values"?
@@ -25,9 +28,11 @@ class ActiveCustomersListView(customerService: CustomerService) {
   }
 
   /**
-   * Same as above but now use [[customerService.customerNameTry(id)]].
+   * Same as above but now use already "Try wrapped" [[customerService.customerNameTry(id)]].
    *
-   * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq
+   * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
+   * Remember with pattern matching you may define a partial function!
+   *
    * TODO gist for collect
    */
   // TODO ???
@@ -40,8 +45,7 @@ class ActiveCustomersListView(customerService: CustomerService) {
   /**
    * Same as above but now use [[customerService.customerNameOption(id)]].
    *
-   * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq
-   * TODO gist for collect
+   * Hint: Have a look at map() and flatten() on Seq to solve this problem very concisely. Is there a way to be even more concise?
    */
   // TODO ???
   def listActiveCustomersOptionBased(ids: Seq[Int]): Seq[String] = ids.flatMap(customerService.customerNameOption)
@@ -49,7 +53,9 @@ class ActiveCustomersListView(customerService: CustomerService) {
   /**
    * Same as above but now use [[customerService.customerNameOr(id)]].
    *
-   * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq
+   * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
+   * Remember with pattern matching you may define a partial function!
+   *
    * TODO gist for collect
    */
   // TODO ???
