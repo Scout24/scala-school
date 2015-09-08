@@ -10,19 +10,23 @@ trait Ordered[T] {
     *
     * Returns `x` where:
     *
-    *   - `x < 0` when `this < that`
+    * - `x < 0` when `this < that`
     *
-    *   - `x == 0` when `this == that`
+    * - `x == 0` when `this == that`
     *
-    *   - `x > 0` when  `this > that`
+    * - `x > 0` when  `this > that`
     *
     */
-    def compare(that: T): Int
+  def compare(that: T): Int
 
-    /* provide a richer interface by implementing these in terms of compare */
-    def <(that: T): Boolean = (this compare that) < 0
-    def >(that: T): Boolean = ???
-    def <=(that: T): Boolean = ???
-    def >=(that: T): Boolean = ???
+  //TODO: Traits Exercise 1 Step 1
+  /* provide a richer interface by implementing these in terms of compare */
+  def <(that: T): Boolean = (this compare that) < 0
+
+  def >(that: T): Boolean = ???
+
+  def <=(that: T): Boolean = ???
+
+  def >=(that: T): Boolean = ???
 
 }

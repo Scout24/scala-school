@@ -6,7 +6,7 @@ class QueueTests extends FlatSpec with MustMatchers {
 
   import Queues._
 
-  // Traits Exercise 2
+  // TODO: Traits Exercise 2
   "queue 1" should "turn a 3 into a 7" in {
     queue1.put(3)
     queue1.get must be === 7

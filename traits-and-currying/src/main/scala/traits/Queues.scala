@@ -46,4 +46,5 @@ object Queues {
 
   // TODO implement a queue that filters negative numbers and increments non-negative numbers
   lazy val queue3: IntQueue with Filtering = ???
+
 }
