@@ -22,6 +22,8 @@ object CurryingExamples {
   val x = funGen(1, Some("A")) //type inference cannot help here
   //val y = funGenCurried(1)(Some("A")) // correctly shows a compile error
 
+
+  //TODO: Currying Exercise
   def modN(n: Int)(x: Int) = ((x % n) == 0)
   def filterByMod2(numbers: Seq[Int]): Seq[Int] = ???
 
