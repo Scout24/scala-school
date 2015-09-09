@@ -7,11 +7,8 @@ import scala.util.{Failure, Success, Try}
 class CustomerService(repo: CustomerRepo) {
 
   def errorMessageNotFound(customerId: Int): String = s"Could not find a customer with id $customerId."
-  def errorMessageInactive(customerId: Int): String = s"Customer with id $customerId is inactive."
 
-  sealed trait CustomerServiceError { def msg: String }
-  case class CustomerNotFound(msg: String) extends CustomerServiceError
-  case class CustomerInactive(msg: String) extends CustomerServiceError
+  case class CustomerNotFound(msg: String)
 
   type CustomerName = String
 
@@ -21,7 +18,7 @@ class CustomerService(repo: CustomerRepo) {
 
     /**
      * Use scala language try/catch to catch exceptions from underlying repo and translate to Option.
-     * But only return None for i.e. Customer not found & inactive
+     * But only return None for i.e. Customer not found
      */
   // TODO ???
   def customerNameOption(id: Int): Option[CustomerName] = {
@@ -29,7 +26,6 @@ class CustomerService(repo: CustomerRepo) {
       Some(repo.getCustomerName(id))
     } catch {
       case e: CustomerNotFoundException => None
-      case e: CustomerInactiveException => None
     }
   }
 
@@ -46,11 +42,10 @@ class CustomerService(repo: CustomerRepo) {
    * Do you see the benefits in the method signature compared to the above solutions?
    */
   // TODO ???
-  def customerNameOr(id: Int): String Or CustomerServiceError = {
+  def customerNameOr(id: Int): String Or CustomerNotFound = {
     Try(repo.getCustomerName(id)) match {
       case Success(name) => Good(name)
       case Failure(e: CustomerNotFoundException) => Bad(CustomerNotFound(errorMessageNotFound(id)))
-      case Failure(e: CustomerInactiveException) => Bad(CustomerInactive(errorMessageInactive(id)))
       case Failure(other) => throw other
     }
   }
