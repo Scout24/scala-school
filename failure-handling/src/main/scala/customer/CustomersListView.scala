@@ -21,9 +21,12 @@ class CustomersListView(customerService: CustomerService) {
    * Same as above but now use already "Try wrapped" [[customerService.customerNameTry(id)]].
    *
    * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
+   * See gist for a collect() demo: https://gist.github.com/breadfan/0a422f009ad17e2c8283
    * Remember with pattern matching you may define a partial function!
    *
-   * See gist for a collect() demo: https://gist.github.com/breadfan/0a422f009ad17e2c8283
+   * Further readings/info:
+   * The scala library Try is usually a good fit to integrate code/libraries that uses exceptions in a functional manner.
+   * See http://www.scala-lang.org/api/current/#scala.util.Try for great examples on Try.
    */
   def listExistingCustomerNamesTryBased(ids: Seq[Int]): Seq[String] = ???
 
