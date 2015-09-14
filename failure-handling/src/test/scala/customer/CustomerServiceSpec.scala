@@ -5,6 +5,8 @@ import org.scalatest.{MustMatchers, WordSpec}
 
 import scala.util.{Failure, Success}
 
+import customer.CustomerService.CustomerNotFound
+
 class CustomerServiceSpec extends WordSpec with MustMatchers {
   val sut = new CustomerService(new CustomerRepoImpl)
   val customerIds = 27 to 35
@@ -23,7 +25,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
 
     "using Scalactic's Or" in {
       sut.customerNameOr(27) must be(Good("John Smith"))
-      sut.customerNameOr(30).isBad must be(true)
+      sut.customerNameOr(30) must be(Bad(CustomerNotFound("Could not find a customer with id 30.")))
     }
   }
 }
