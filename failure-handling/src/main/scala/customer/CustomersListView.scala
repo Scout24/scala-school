@@ -2,7 +2,7 @@ package customer
 
 import org.scalactic.Good
 
-import scala.util.{Success, Try}
+import scala.util.{Failure, Success, Try}
 
 class CustomersListView(customerService: CustomerService) {
 

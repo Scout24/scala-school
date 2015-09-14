@@ -5,8 +5,6 @@ import org.scalatest.{MustMatchers, WordSpec}
 
 import scala.util.{Failure, Success}
 
-import customer.CustomerService.CustomerNotFound
-
 class CustomerServiceSpec extends WordSpec with MustMatchers {
   val sut = new CustomerService(new CustomerRepoImpl)
   val customerIds = 27 to 35
