@@ -15,11 +15,8 @@ class CustomersListView(customerService: CustomerService) {
    * Hint: If you use Try() have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
    * Remember with pattern matching you may define a partial function!
    *
-   * TODO gist for collect
-   *
    * Do you see the burden that is put on the client when using Exceptions for "business return values"?
    */
-  // TODO ???
   def listExistingCustomerNamesLangTryBased(ids: Seq[Int]): Seq[String] = {
     val possibleCustomerNames = ids.map { id => Try(customerService.customerName(id)) }
     possibleCustomerNames.collect {
@@ -32,10 +29,7 @@ class CustomersListView(customerService: CustomerService) {
    *
    * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
    * Remember with pattern matching you may define a partial function!
-   *
-   * TODO gist for collect
    */
-  // TODO ???
   def listExistingCustomerNamesTryBased(ids: Seq[Int]): Seq[String] = {
     ids.map(customerService.customerNameTry).collect {
       case Success(name) => name
@@ -47,7 +41,6 @@ class CustomersListView(customerService: CustomerService) {
    *
    * Hint: Have a look at map() and flatten() on Seq to solve this problem very concisely. Is there a way to be even more concise?
    */
-  // TODO ???
   def listExistingCustomerNamesOptionBased(ids: Seq[Int]): Seq[String] = ids.flatMap(customerService.customerNameOption)
 
   /**
@@ -55,10 +48,7 @@ class CustomersListView(customerService: CustomerService) {
    *
    * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
    * Remember with pattern matching you may define a partial function!
-   *
-   * TODO gist for collect
    */
-  // TODO ???
   def listExistingCustomerNamesScalacticOrBased(ids: Seq[Int]): Seq[String] = {
     ids.map(customerService.customerNameOr).collect {
       case Good(name) => name

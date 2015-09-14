@@ -27,8 +27,7 @@ object FailFastOrAccumulatingErrorsWithScalacticOr {
    *
    * Hint: Use for comprehension over the parseAge and parseName
    */
-  // TODO ???
-  def parsePersonFailFast(inputName: String, inputAge: String): Person Or One[ErrorMessage] = 
+  def parsePersonFailFast(inputName: String, inputAge: String): Person Or One[ErrorMessage] =
     for {
       name <- parseName(inputName)
       age <- parseAge(inputAge)
@@ -39,7 +38,6 @@ object FailFastOrAccumulatingErrorsWithScalacticOr {
    *
    * Hint: You can't use a for comprehension to accumulate error messages, since for comprehension is fail fast. Think about using Scalactic's Accumulation.withGood
    */
-  // TODO ???
   def parsePersonAccumulateErrors(inputName: String, inputAge: String): Person Or Every[ErrorMessage] = {
     val name = parseName(inputName)
     val age = parseAge(inputAge)

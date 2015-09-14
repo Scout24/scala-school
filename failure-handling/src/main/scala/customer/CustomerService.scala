@@ -20,7 +20,6 @@ class CustomerService(repo: CustomerRepo) {
      * Use scala language try/catch to catch exceptions from underlying repo and translate to Option.
      * But only return None for i.e. Customer not found
      */
-  // TODO ???
   def customerNameOption(id: Int): Option[CustomerName] = {
     try {
       Some(repo.getCustomerName(id))
@@ -32,7 +31,6 @@ class CustomerService(repo: CustomerRepo) {
   /**
    * Use Try from Scala library (one liner).
    */
-  // TODO ???
   def customerNameTry(id: Int): Try[CustomerName] = Try(repo.getCustomerName(id))
 
   /**
@@ -41,7 +39,6 @@ class CustomerService(repo: CustomerRepo) {
    *
    * Do you see the benefits in the method signature compared to the above solutions?
    */
-  // TODO ???
   def customerNameOr(id: Int): String Or CustomerNotFound = {
     Try(repo.getCustomerName(id)) match {
       case Success(name) => Good(name)
