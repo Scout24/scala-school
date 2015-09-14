@@ -19,13 +19,7 @@ class CustomersListView(customerService: CustomerService) {
    *
    * Do you see the burden that is put on the client when using Exceptions for "business return values"?
    */
-  // TODO ???
-  def listExistingCustomerNamesLangTryBased(ids: Seq[Int]): Seq[String] = {
-    val possibleCustomerNames = ids.map { id => Try(customerService.customerName(id)) }
-    possibleCustomerNames.collect {
-      case Success(name) => name
-    }
-  }
+  def listExistingCustomerNamesLangTryBased(ids: Seq[Int]): Seq[String] = ???
 
   /**
    * Same as above but now use already "Try wrapped" [[customerService.customerNameTry(id)]].
@@ -35,20 +29,16 @@ class CustomersListView(customerService: CustomerService) {
    *
    * TODO gist for collect
    */
-  // TODO ???
-  def listExistingCustomerNamesTryBased(ids: Seq[Int]): Seq[String] = {
-    ids.map(customerService.customerNameTry).collect {
-      case Success(name) => name
-    }
-  }
+  def listExistingCustomerNamesTryBased(ids: Seq[Int]): Seq[String] = ???
 
   /**
    * Same as above but now use [[customerService.customerNameOption(id)]].
    *
    * Hint: Have a look at map() and flatten() on Seq to solve this problem very concisely. Is there a way to be even more concise?
+   *
+   * TODO gist for flatten on List[Option]
    */
-  // TODO ???
-  def listExistingCustomerNamesOptionBased(ids: Seq[Int]): Seq[String] = ids.flatMap(customerService.customerNameOption)
+  def listExistingCustomerNamesOptionBased(ids: Seq[Int]): Seq[String] = ???
 
   /**
    * Same as above but now use [[customerService.customerNameOr(id)]].
@@ -58,10 +48,5 @@ class CustomersListView(customerService: CustomerService) {
    *
    * TODO gist for collect
    */
-  // TODO ???
-  def listExistingCustomerNamesScalacticOrBased(ids: Seq[Int]): Seq[String] = {
-    ids.map(customerService.customerNameOr).collect {
-      case Good(name) => name
-    }
-  }
+  def listExistingCustomerNamesScalacticOrBased(ids: Seq[Int]): Seq[String] = ???
 }
