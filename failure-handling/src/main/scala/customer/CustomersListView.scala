@@ -2,7 +2,7 @@ package customer
 
 import org.scalactic.Good
 
-import scala.util.{Success, Try}
+import scala.util.{Failure, Success, Try}
 
 class CustomersListView(customerService: CustomerService) {
 
@@ -30,10 +30,10 @@ class CustomersListView(customerService: CustomerService) {
    * Same as above but now use already "Try wrapped" [[customerService.customerNameTry(id)]].
    *
    * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
+   * See gist for a collect() demo: https://gist.github.com/breadfan/0a422f009ad17e2c8283
    * Remember with pattern matching you may define a partial function!
    *
-   * The scala library Try is usually a good fit to integrate code/libraries that uses exceptions in a functional manner.
-   * See http://www.scala-lang.org/api/current/#scala.util.Try for great examples on Try.
+   * TODO gist for collect
    */
   def listExistingCustomerNamesTryBased(ids: Seq[Int]): Seq[String] = {
     ids.map(customerService.customerNameTry).collect {
@@ -44,7 +44,7 @@ class CustomersListView(customerService: CustomerService) {
   /**
    * Same as above but now use [[customerService.customerNameOption(id)]].
    *
-   * Hint: Have a look at map() and flatten() on Seq to solve this problem very concisely. Is there a way to be even more concise?
+   * Hint: Have a look at map() and flatten() on Seq to solve this problem very concisely. Is there a way to be even more concise, i.e. combine map and flatten?
    */
   def listExistingCustomerNamesOptionBased(ids: Seq[Int]): Seq[String] = ids.flatMap(customerService.customerNameOption)
 
@@ -53,6 +53,8 @@ class CustomersListView(customerService: CustomerService) {
    *
    * Hint: Have a look at collect method in http://www.scala-lang.org/api/current/#scala.collection.Seq in conjunction with pattern matching.
    * Remember with pattern matching you may define a partial function!
+   *
+   * See gist for a collect() demo: https://gist.github.com/breadfan/0a422f009ad17e2c8283
    */
   def listExistingCustomerNamesScalacticOrBased(ids: Seq[Int]): Seq[String] = {
     ids.map(customerService.customerNameOr).collect {

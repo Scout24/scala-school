@@ -42,6 +42,5 @@ class FailFastOrAccumulatingErrorsWithScalacticOrSpec extends WordSpec with Must
     "parse person with both invalid" in {
       parsePersonAccumulateErrors("", "") must be(Bad(Many(""""" is not a valid name""", """"" is not a valid integer""")))
     }
-
   }
 }

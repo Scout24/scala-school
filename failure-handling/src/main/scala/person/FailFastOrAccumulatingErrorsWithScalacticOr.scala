@@ -23,9 +23,9 @@ object FailFastOrAccumulatingErrorsWithScalacticOr {
   }
 
   /**
-   * Implement by returning a Person if both name and age are correct, or an error message on the first encountered error
+   * Implement by returning a Person if both name and age are correct (use parseName and parseAge from above), or an error message on the first encountered error
    *
-   * Hint: Use for comprehension over the parseAge and parseName
+   * Hint: Use for comprehension over the parseAge and parseName method
    */
   def parsePersonFailFast(inputName: String, inputAge: String): Person Or One[ErrorMessage] =
     for {
@@ -36,7 +36,8 @@ object FailFastOrAccumulatingErrorsWithScalacticOr {
   /**
    * Implement by returning a Person if both name and age are correct, or a Bad(One(...)) or Bad(Many(...) in case of error(s)
    *
-   * Hint: You can't use a for comprehension to accumulate error messages, since for comprehension is fail fast. Think about using Scalactic's Accumulation.withGood
+   * Hint: You can't use a for comprehension to accumulate error messages, since for comprehension is fail fast.
+   * Think about using Scalactic's Accumulation.withGood using the outputs from parseName and parseAge.
    */
   def parsePersonAccumulateErrors(inputName: String, inputAge: String): Person Or Every[ErrorMessage] = {
     val name = parseName(inputName)
