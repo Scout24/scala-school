@@ -48,7 +48,17 @@ class ApplicationControllerFunSuite extends FunSuiteWrapper {
     assert(contentAsString(response).contains("Der Umfang eines Kreises mit Radius 2.0 ist 12.56"))
   }
 
-
+  test("sequence should return first five values in the multiplication table of startValue") {
+    val startValue = 3
+    val Some(response) = route(FakeRequest(GET, s"/sequence/$startValue"))
+    assert(status(response) === OK)
+    val result: Seq[Int] = contentAsJson(response).as[Seq[Int]]
+    assert(result.contains(3))
+    assert(result.contains(6))
+    assert(result.contains(12))
+    assert(result.contains(15))
+    assert(!result.contains(18))
+  }
 }
 
 //TODO: Re-write this test using the FlatSpec style

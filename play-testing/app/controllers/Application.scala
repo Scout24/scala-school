@@ -23,4 +23,8 @@ class Application extends Controller {
   def circumference(r: Double) = Action { implicit request =>
     Ok(Json.toJson(Calculator.circumference(r)))
   }
+
+  def sequence(i: Int) = Action { implicit request =>
+    Ok(Json.toJson(Calculator.sequence(i)))
+  }
 }
