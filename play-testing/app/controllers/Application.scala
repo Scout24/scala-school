@@ -1,8 +1,8 @@
 package controllers
 
 import models.Calculator
+import play.api.libs.json.Json
 import play.api.mvc._
-import play.twirl.api.Html
 import views.html.resultPage
 
 class Application extends Controller {
@@ -15,8 +15,12 @@ class Application extends Controller {
     Status(BAD_REQUEST)
   }
 
-  def circumference(r: Double) = Action { implicit request =>
+  def circumferencePage(r: Double) = Action { implicit request =>
     val language = request.getQueryString("language").getOrElse("")
     Ok(resultPage(r,language))
+  }
+
+  def circumference(r: Double) = Action { implicit request =>
+    Ok(Json.toJson(Calculator.circumference(r)))
   }
 }
