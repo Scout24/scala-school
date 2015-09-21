@@ -2,7 +2,7 @@
 
     @import models.Calculator
 
-    @main("Your circumference is...") {
+    @main(if(language == "de") "Your circumference is..." else "Ihr Umfang ist..") {
         <h2>
         @if(language == "de") {
             Der Umfang eines Kreises mit Radius @radius ist @{Calculator.circumference(radius)}.
