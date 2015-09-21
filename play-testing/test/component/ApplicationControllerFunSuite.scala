@@ -120,8 +120,8 @@ class ApplicationControllerWordSpec extends WordSpecWrapper {
   }
 
   "The sequence endpoint" when {
-    "called with start value 3" should {
-      "respond with the first five values of the multiplication table" in {
+    "called with a valid number" should {
+      "respond with the first five values of this numbers multiplication table" in {
         val startValue = 3
         val Some(response) = route(FakeRequest(GET, s"/sequence/$startValue"))
         status(response) mustBe OK
@@ -129,15 +129,20 @@ class ApplicationControllerWordSpec extends WordSpecWrapper {
 
         result must contain allOf(3, 6, 9, 12, 15)
       }
-    }
-    "called with start value 0" should {
-      "respond with five zeros" in {
+      "respond with five zeros when 0 is the start value" in {
         val startValue = 0
         val Some(response) = route(FakeRequest(GET, s"/sequence/$startValue"))
         status(response) mustBe OK
         val result: Seq[Int] = contentAsJson(response).as[Seq[Int]]
 
         result must contain only(0)
+        result must have length (5)
+      }
+    }
+    "called with string instead of a number" should {
+      "respond with an error code" in {
+        val Some(response) = route(FakeRequest(GET, s"/sequence/abc"))
+        status(response) mustEqual BAD_REQUEST
       }
     }
   }
