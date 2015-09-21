@@ -36,13 +36,13 @@ class ApplicationSpec extends Specification {
       val circ = route(FakeRequest(GET, "/circumference/2")).get
 
       status(circ) must equalTo(OK)
-      contentType(circ) must beSome.which(_ == "text/html")
+      contentType(circ) must beSome.which(_ == "application/json")
       contentAsString(circ) must contain("12.56637061436")
     }
 
 
     "render a result page with the calculated circumference" in new WithApplication{
-      val circ = route(FakeRequest(GET, "/circumference/2")).get
+      val circ = route(FakeRequest(GET, "/circumference-page/2")).get
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "text/html")
@@ -50,7 +50,7 @@ class ApplicationSpec extends Specification {
     }
 
     "render a german result page with the calculated circumference" in new WithApplication{
-      val circ = route(FakeRequest(GET, "/circumference/2?language=de")).get
+      val circ = route(FakeRequest(GET, "/circumference-page/2?language=de")).get
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "text/html")
