@@ -19,12 +19,35 @@ class ApplicationControllerFunSuite extends FunSuiteWrapper {
     assert(contentAsString(response).toDouble < 12.567)
   }
 
-  test("circumferencePage should return the circumference of a circle with radius r in different languages") {
+  test("circumferencePage should be in English by default") {
+    val radius = 2.0
+    val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius"))
+    assert(status(response) === OK)
+    assert(contentAsString(response).contains("<title>Your circumference is...</title>"))
+  }
+
+  test("circumferencePage should return the circumference of a circle with radius r in English by default") {
+    val radius = 2.0
+    val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius"))
+    assert(status(response) === OK)
+    assert(contentAsString(response).contains("The circumference of a circle with radius 2.0 is 12.56"))
+  }
+
+  test("circumferencePage should be translated into German") {
     val radius = 2.0
     val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius?language=de"))
     assert(status(response) === OK)
+    assert(contentAsString(response).contains("<title>Ihr Umfang ist...</title>"))
+  }
+
+  test("circumferencePage should return the circumference of a circle with radius r in German") {
+    val radius = 2.0
+    val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius?language=de"))
+    assert(status(response) === OK)
+    assert(contentAsString(response).contains("<title>Ihr Umfang ist...</title>"))
     assert(contentAsString(response).contains("Der Umfang eines Kreises mit Radius 2.0 ist 12.56"))
   }
+
 
 }
 
