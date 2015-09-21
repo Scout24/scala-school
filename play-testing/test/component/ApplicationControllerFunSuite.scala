@@ -65,7 +65,84 @@ class ApplicationControllerFunSuite extends FunSuiteWrapper {
 class ApplicationControllerFlatSpec extends FlatSpecWrapper
 
 //TODO: Re-write this test using the WordSpec style
-class ApplicationControllerWordSpec extends WordSpecWrapper
+class ApplicationControllerWordSpec extends WordSpecWrapper {
+
+  "The circumference endpoint" should {
+
+    "respond with a value that is close the precise circumference" in {
+      val radius = 2.0
+      val Some(response) = route(FakeRequest(GET, s"/circumference/$radius"))
+
+      status(response) mustBe OK
+      contentAsString(response).toDouble mustBe 12.56 +- 0.01
+    }
+  }
+
+  "The circumference-page endpoint" when {
+
+    "called with German language query parameter" should {
+
+      "respond with a page with a German title" in {
+        val radius = 2.0
+        val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius?language=de"))
+
+        status(response) mustBe OK
+        contentAsString(response) must include("<title>Ihr Umfang ist...</title>")
+      }
+
+      "respond with a page with a German result message containing the correct value" in {
+        val radius = 2.0
+        val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius?language=de"))
+
+        status(response) mustBe OK
+        contentAsString(response) must include("Der Umfang eines Kreises mit Radius 2.0 ist 12.56")
+      }
+    }
+
+    "called with (default) English language query parameter" should {
+
+      "respond with a page with an English title" in {
+        val radius = 2.0
+        val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius?language=en"))
+
+        status(response) mustBe OK
+        contentAsString(response) must include("<title>Your circumference is...</title>")
+      }
+
+      "respond with a page with an English result message containing the correct value" in {
+        val radius = 2.0
+        val Some(response) = route(FakeRequest(GET, s"/circumference-page/$radius?language=en"))
+
+        status(response) mustBe OK
+        contentAsString(response) must include("The circumference of a circle with radius 2.0 is 12.56")
+      }
+    }
+  }
+
+  "The sequence endpoint" when {
+    "called with start value 3" should {
+      "respond with the first five values of the multiplication table" in {
+        val startValue = 3
+        val Some(response) = route(FakeRequest(GET, s"/sequence/$startValue"))
+        status(response) mustBe OK
+        val result: Seq[Int] = contentAsJson(response).as[Seq[Int]]
+
+        result must contain allOf(3, 6, 9, 12, 15)
+      }
+    }
+    "called with start value 0" should {
+      "respond with five zeros" in {
+        val startValue = 0
+        val Some(response) = route(FakeRequest(GET, s"/sequence/$startValue"))
+        status(response) mustBe OK
+        val result: Seq[Int] = contentAsJson(response).as[Seq[Int]]
+
+        result must contain only(0)
+      }
+    }
+  }
+}
+
 
 //TODO: Re-write this test using the FunSpec style
 class ApplicationControllerFunSpec extends FunSpecWrapper
