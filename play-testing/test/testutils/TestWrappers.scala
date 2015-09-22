@@ -16,6 +16,7 @@ with DefaultAwaitTimeout
 with OneAppPerTest
 
 class FlatSpecWrapper extends FlatSpec
+with MustMatchers
 with Writeables
 with RouteInvokers
 with PlayRunners
@@ -37,6 +38,7 @@ with DefaultAwaitTimeout
 with OneAppPerSuite
 
 class FunSpecWrapper extends FunSpec
+with MustMatchers
 with Writeables
 with RouteInvokers
 with PlayRunners
@@ -47,6 +49,7 @@ with DefaultAwaitTimeout
 with OneAppPerTest
 
 class PropSpecWrapper extends PropSpec
+with MustMatchers
 with Writeables
 with RouteInvokers
 with PlayRunners
@@ -57,6 +60,7 @@ with DefaultAwaitTimeout
 with OneAppPerTest
 
 class FeatureSpecWrapper extends FeatureSpec
+with MustMatchers
 with Writeables
 with RouteInvokers
 with PlayRunners
