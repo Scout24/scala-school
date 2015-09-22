@@ -29,7 +29,7 @@ class ApplicationSpec extends Specification {
     }
 
     "calculate the circumference" in new WithApplication{
-      val circ = route(FakeRequest(GET, "/circumference-page/2")).get
+      val circ = route(FakeRequest(GET, "/circumference/2")).get
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "application/json")
