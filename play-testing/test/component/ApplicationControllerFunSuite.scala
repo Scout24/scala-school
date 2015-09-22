@@ -5,11 +5,12 @@ import testutils._
 
 class ApplicationControllerFunSuite extends FunSuiteWrapper {
 
-  test("root path should return 200") {
+  //TODO: Fix this test
+  test("root path should return 200") (pendingUntilFixed( {
     val Some(response) = route(FakeRequest(GET, "/"))
     assert(status(response) === OK)
-    assert(contentAsString(response).contains("Your new application is ready."))
-  }
+    assert(contentAsString(response).contains("Your new application is not ready."))
+  }))
 
   test("circumference should return the circumference of a circle with radius r") {
     val radius = 2.0
@@ -59,6 +60,9 @@ class ApplicationControllerFunSuite extends FunSuiteWrapper {
     assert(result.contains(15))
     assert(!result.contains(18))
   }
+
+  //TODO: Write another test
+  test("some test that hasn't been written yet") (pending)
 }
 
 //TODO: Re-write this test using the FlatSpec style

@@ -1,14 +1,10 @@
 package integration
 
-import org.specs2.matcher.Matcher
+import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
-import org.junit.runner._
-
-import play.api.test._
 import play.api.test.Helpers._
-
-import scala.util.matching.Regex
+import play.api.test._
 
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
@@ -33,7 +29,7 @@ class ApplicationSpec extends Specification {
     }
 
     "calculate the circumference" in new WithApplication{
-      val circ = route(FakeRequest(GET, "/circumference/2")).get
+      val circ = route(FakeRequest(GET, "/circumference-page/2")).get
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "application/json")
