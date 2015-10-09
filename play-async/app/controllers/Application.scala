@@ -1,22 +1,32 @@
 package controllers
 
-import models.Calculator
+import javax.inject.Inject
+
+import models.{LocalModelsCounterMoto, LocalModelsCounterCars}
+import play.api.libs.ws.WSClient
 import play.api.mvc._
-import play.twirl.api.Html
-import views.html.resultPage
+import views.html.{index}
+import play.api.libs.json._
 
-class Application extends Controller {
+class Application @Inject()(ws: WSClient) extends Controller {
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+  // TODO Exercise 2 - switch to remote counter source
+  def root = Action {
+    val counter = LocalModelsCounterCars.counter + LocalModelsCounterMoto.counter
+    Ok(index(counter))
   }
 
-  def invalid = Action {
-    Status(BAD_REQUEST)
-  }
+  case class CounterResponse(counter: Int)
+  implicit val crf = Json.format[CounterResponse]
 
-  def circumference(r: Double) = Action { implicit request =>
-    val language = request.getQueryString("language").getOrElse("")
-    Ok(resultPage(r,language))
+  def rootremote = Action.async {
+    import scala.concurrent.ExecutionContext.Implicits.global
+    val url = "localhost:9000"
+    val carsCounter = ws.url(url + "/carscounter").get
+    val motoCounter = ws.url(url + "/motocounter").get
+    for {
+      cc <- carsCounter.map(_.json.validate[CounterResponse].get.counter)
+      mc <- motoCounter.map(_.json.validate[CounterResponse].get.counter)
+    } yield Ok(index(cc + mc))
   }
 }
