@@ -10,7 +10,6 @@ import play.api.test.Helpers._
 
 import scala.util.matching.Regex
 
-@RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
 
   "Application" should {
@@ -24,15 +23,15 @@ class ApplicationSpec extends Specification {
 
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "text/html")
-      contentAsString(home) must contain("0 vehicles found")
+      contentAsString(home) must contain("84 vehicles found")
     }
 
-    "render the index page using the remote counters" in new WithApplication {
+    "render the index page using the remote counters" in new WithServer(port = 9000) {
       val home = route(FakeRequest(GET, "/remote")).get
 
       status(home) must equalTo(OK)
       contentType(home) must beSome.which(_ == "text/html")
-      contentAsString(home) must contain("0 vehicles found")
+      contentAsString(home) must contain("84 vehicles found")
     }
   }
 }

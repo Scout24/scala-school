@@ -3,10 +3,12 @@ package controllers
 import javax.inject.Inject
 
 import models.{LocalModelsCounterMoto, LocalModelsCounterCars}
-import play.api.libs.ws.WSClient
+import play.api.libs.ws.{WSResponse, WSClient}
 import play.api.mvc._
 import views.html.{index}
 import play.api.libs.json._
+
+import scala.concurrent.Future
 
 class Application @Inject()(ws: WSClient) extends Controller {
 
@@ -21,7 +23,7 @@ class Application @Inject()(ws: WSClient) extends Controller {
 
   def rootremote = Action.async {
     import scala.concurrent.ExecutionContext.Implicits.global
-    val url = "localhost:9000"
+    val url = "http://localhost:9000"
     val carsCounter = ws.url(url + "/carscounter").get
     val motoCounter = ws.url(url + "/motocounter").get
     for {

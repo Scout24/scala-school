@@ -8,10 +8,10 @@ import views.html.index
 class RemoteCounter extends Controller {
 
   def carscounter = Action {
-    Ok(JsObject(Seq("counter" -> JsNumber(0))))
+    Ok(JsObject(Seq("counter" -> JsNumber(LocalModelsCounterCars.counter))))
   }
 
   def motocounter = Action {
-    Ok(JsObject(Seq("counter" -> JsNumber(0))))
+    Ok(JsObject(Seq("counter" -> JsNumber(LocalModelsCounterMoto.counter))))
   }
 }
