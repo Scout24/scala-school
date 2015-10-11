@@ -19,13 +19,14 @@ class Application @Inject()(ws: WSClient) extends Controller {
 
   case class CounterResponse(counter: Int)
   implicit val crf = Json.format[CounterResponse]
-  def counterFromJsonResponse(response: WSResponse) = response.json.validate[CounterResponse].get.counter
+  def counterFromJsonResponse(response: WSResponse): Int = response.json.validate[CounterResponse].get.counter
 
   // TODO Exercise 2 - implement same behaviour as above but using remote counter sources
   def rootremote = Action.async {
     import scala.concurrent.ExecutionContext.Implicits.global
-    val carsCounter = ws.url("http://localhost:9000/carscounter").get
-    val motoCounter = ws.url("http://localhost:9000/motocounter").get
+    val carsCounter: Future[WSResponse] = ws.url("http://localhost:9000/carscounter").get
+    val motoCounter: Future[WSResponse] = ws.url("http://localhost:9000/motocounter").get
+
     val res: Future[Result] = ???
     res
   }
