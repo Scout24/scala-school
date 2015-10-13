@@ -1,6 +1,5 @@
 package unit
 
-import models.FutureExamples
 import org.scalatest.WordSpec
 import org.scalatest.mock.MockitoSugar
 import play.api.Logger
@@ -9,7 +8,6 @@ import org.mockito.Mockito._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.io.Source
-
 
 object ContentLoader {
   

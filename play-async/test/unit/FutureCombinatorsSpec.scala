@@ -10,7 +10,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 class FutureCombinatorsSpec extends WordSpec with Matchers {
 
-
   def fileBy(name: String) = Future {
     Source.fromFile(name)
   }
