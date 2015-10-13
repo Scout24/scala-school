@@ -6,8 +6,9 @@ scalaVersion in ThisBuild := "2.11.6"
 scalacOptions in ThisBuild ++= Seq("-unchecked", "-deprecation", "-feature", "-Xfatal-warnings")
 
 libraryDependencies ++= Seq(
-//  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
-//  "org.scalatestplus" %% "play" % "1.4.0-M3" % "test",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "org.scalatestplus" %% "play" % "1.4.0-M3" % "test",
+  "org.scala-lang.modules" % "scala-async_2.11" % "0.9.6-RC2",
   ws,
   specs2 % Test
 )

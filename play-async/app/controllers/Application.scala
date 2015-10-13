@@ -4,7 +4,7 @@ import javax.inject.Inject
 
 import play.api.libs.ws.{WSResponse, WSClient}
 import play.api.mvc._
-import views.html.{index}
+import views.html.index
 import play.api.libs.json._
 
 import scala.concurrent.Future
