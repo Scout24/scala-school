@@ -11,7 +11,7 @@ import scala.io.Source
 
 object ContentLoader {
   
-  // TODO Exercise 1 - Use a future to make the logger log immediately after loading has started
+  // TODO Exercise 1 - Use a Future.apply to make the logger log immediately after loading has started
   def loadWebContent(logger: Logger) = {
     val str = Source.fromURL("http://example.com").mkString
     logger.info("started loading...")
