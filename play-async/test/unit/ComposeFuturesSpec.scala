@@ -24,7 +24,6 @@ class ComposeFuturesSpec extends WordSpec with Matchers {
       val sum = Future { 0 }
 
       Await.result(sum, 1 second) should be(6)
-      a
     }
 
   }
