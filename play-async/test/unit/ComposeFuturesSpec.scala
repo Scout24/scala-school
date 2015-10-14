@@ -20,7 +20,7 @@ class ComposeFuturesSpec extends WordSpec with Matchers {
 
       val (f1,f2,f3) = (Future {1}, Future {2}, Future {3})
 
-      // TODO Exercise 3 - calculate the sum of all futures, e.g., using 'static' helper methods in Future companion object
+      // TODO Exercise 4 - calculate the sum of all futures, e.g., using 'static' helper methods in Future companion object
       val sum = Future { 0 }
 
       Await.result(sum, 1 second) should be(6)

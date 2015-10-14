@@ -18,6 +18,7 @@ object ThreadName {
       override def execute(command: Runnable): Unit = command.run()
     })
 
+    // TODO Exercise 2 - use a different execution context to make the test green
     Future {
       getThreadNameMain()
     }
@@ -25,11 +26,9 @@ object ThreadName {
 
 }
 
-
 class FutureThreadNameSpec extends WordSpec with Matchers {
 
   "The Future " should {
-
 
     "return a different thread name" in {
 

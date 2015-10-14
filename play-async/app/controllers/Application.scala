@@ -21,7 +21,7 @@ class Application @Inject()(ws: WSClient) extends Controller {
   implicit val crf = Json.format[CounterResponse]
   def counterFromJsonResponse(response: WSResponse): Int = response.json.validate[CounterResponse].get.counter
 
-  // TODO Exercise 4 - implement same behaviour as above with remote counters, e.g., by using a for comprehension
+  // TODO Exercise 5 - implement same behaviour as above with remote counters, e.g., by using a for comprehension
   def rootremote = Action.async {
     import scala.concurrent.ExecutionContext.Implicits.global
     val carsCounterResponse: Future[WSResponse] = ws.url("http://localhost:9000/carscounter").get

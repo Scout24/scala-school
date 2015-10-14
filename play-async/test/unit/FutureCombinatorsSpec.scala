@@ -20,7 +20,7 @@ class FutureCombinatorsSpec extends WordSpec with Matchers {
 
   def getHelloWordFile() = fileBy("test/HelloWorld.txt")
 
-  // TODO Exercise 2 - use combinator (instance) methods flatMap, map, and recover provided by Future
+  // TODO Exercise 3 - use combinator (instance) methods flatMap, map, and recover provided by Future
   def getHelloWorld() :  Future[String] = ???
 
   def getHelloWorldUpperCase() : Future[String] = ???
