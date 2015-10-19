@@ -1,13 +1,21 @@
 package exercise03
 
-// --------------- TODO Exercise 03 - Complete me ------------
+// --------------- TODO Exercise 03 - allow orderings over supertypes of A in ImmutableList.min ------------
 
 trait ImmutableList[A] {
   def prepend(el: A): ImmutableListItem[A] = ImmutableListItem(el, this)
 
   def contains(el: A): Boolean = this match {
     case ImmutableListEnd() => false
-    case ImmutableListItem(value, tail) => if(value == el) true else tail.contains(el)
+    case ImmutableListItem(value, tail) => if (value == el) true else tail.contains(el)
+  }
+
+  def min(cmp: Ordering[A]): Option[A] = this match {
+    case ImmutableListEnd() => None
+    case ImmutableListItem(value, tail) => tail.min(cmp) match {
+      case None => Some(value)
+      case Some(min) => if (cmp.lt(value, min)) Some(value) else Some(min)
+    }
   }
 }
 
