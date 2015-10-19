@@ -7,6 +7,13 @@ import variance.Introduction._
 
 class VarianceTests extends FlatSpec with MustMatchers {
 
+  class Apple extends Fruit { val name = "Apple" }
+
+  "Immutable List" should "be covariant in T" in {
+    val lst = ImmutableListEnd[Orange].prepend(new Orange)
+    lst.prepend(new Apple)
+  }
+
   "RX.Observable" should "be covariant in [E]" in {
     val squeezer: JuiceSqueezer = new JuiceSqueezer
     var juices: List[Juice] = Nil
