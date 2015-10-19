@@ -4,6 +4,7 @@ import org.scalatest._
 import variance.RXVarianced._
 // import variance.RXTyped._
 import variance.Introduction._
+import fruits._
 
 class VarianceTests extends FlatSpec with MustMatchers {
 

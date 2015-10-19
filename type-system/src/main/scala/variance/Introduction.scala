@@ -1,5 +1,7 @@
 package variance
 
+import fruits._
+
 object Introduction {
 
   makeOrangeJuice(new GroceryStore, new JuiceSqueezer)
@@ -11,14 +13,6 @@ object Introduction {
     val juice:  Juice  = squeezer.process(orange)
     juice
   }
-
-  abstract class Fruit { val name: String }
-
-  abstract class CitrusFruit extends Fruit { }
-
-  class Orange extends CitrusFruit { val name = "Orange" }
-
-  class OrganicOrange extends Orange { override val name = "Organic orange" }
 
   class GroceryStore {
     def getOrange(): Orange = new Orange
