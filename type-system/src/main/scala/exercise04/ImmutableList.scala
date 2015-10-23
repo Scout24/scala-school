@@ -1,13 +1,12 @@
-package exercise03
+package exercise04
 
-import fruits._
+import fruits.{Apple, OrganicOrange, Fruit, Orange}
 import org.scalatest.{MustMatchers, FlatSpec}
 
-/* --------------- Exercise 03 -------------
- * TODO allow orderings over supertypes of A in ImmutableList.min
- * Hint: introduce a type parameter with a lower bound to method ImmutableList.min
+/* --------------- Exercise 04 -------------
+ * TODO add covariance to type parameter A and handle the resulting compile errors on prepend and contains.
+ * Hint: introduce a type parameter with a lower bound to the methods.
  */
-
 trait ImmutableList[A] {
   def prepend(el: A): ImmutableListItem[A] = ImmutableListItem(el, this)
 
@@ -16,7 +15,7 @@ trait ImmutableList[A] {
     case ImmutableListItem(value, tail) => if (value == el) true else tail.contains(el)
   }
 
-  def min(cmp: Ordering[A]): Option[A] = this match {
+  def min[B >: A](cmp: Ordering[B]): Option[A] = this match {
     case ImmutableListEnd() => None
     case ImmutableListItem(value, tail) => tail.min(cmp) match {
       case None => Some(value)
@@ -46,7 +45,7 @@ case class MyInt(x: Int) extends Similar {
 
 // -------------- Tests ----------------------
 
-class ImmutableListTest  extends FlatSpec with MustMatchers {
+class ImmutableListTest extends FlatSpec with MustMatchers {
 
   "Immutable List" should "be generic" in {
     val orange = new Orange
@@ -70,7 +69,7 @@ class ImmutableListTest  extends FlatSpec with MustMatchers {
   }
 
   "ImmutableList.min" should "allow a more generic comparator" in {
-    var order: Ordering[Fruit] = new Ordering[Fruit] {
+    val order: Ordering[Fruit] = new Ordering[Fruit] {
       def compare(x: Fruit, y: Fruit) = x.name.compareTo(y.name)
     }
 
@@ -80,4 +79,22 @@ class ImmutableListTest  extends FlatSpec with MustMatchers {
 
     lst.min(order) must be(orange)
   }
+
+  "ImmutableList" should "be covariant" in {
+    val orange = new Orange
+    val oranges: ImmutableList[Orange] = ImmutableListEnd().prepend(orange)
+    val fruits: ImmutableList[Fruit] = oranges
+
+    fruits.contains(orange) must be true
+  }
+
+  "ImmutableList.prepend" should "allow more generic types" in {
+    val orange = new Orange
+    val apple = new Apple
+    val oranges: ImmutableList[Orange] = ImmutableListEnd().prepend(orange)
+    val fruits: ImmutableList[Fruit] = oranges.prepend(apple)
+
+    fruits.contains(orange) must be true
+  }
+
 }
