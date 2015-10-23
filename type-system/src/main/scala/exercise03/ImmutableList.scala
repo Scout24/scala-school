@@ -70,7 +70,7 @@ class ImmutableListTest  extends FlatSpec with MustMatchers {
   }
 
   "ImmutableList.min" should "allow a more generic comparator" in {
-    var order: Ordering[Fruit] = new Ordering[Fruit] {
+    val order: Ordering[Fruit] = new Ordering[Fruit] {
       def compare(x: Fruit, y: Fruit) = x.name.compareTo(y.name)
     }
 
