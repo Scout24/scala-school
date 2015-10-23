@@ -1,5 +1,8 @@
 package exercise02
 
+import fruits.Orange
+import org.scalatest.{MustMatchers, FlatSpec}
+
 class ImmutableListTest extends FlatSpec with MustMatchers {
 
   "Immutable List" should "be generic" in {
