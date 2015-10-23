@@ -1,6 +1,4 @@
-package variance
-
-import fruits._
+package fruits
 
 object Introduction {
 
@@ -34,8 +32,4 @@ object Introduction {
   }
 
   case class Juice(val description: String)
-
-  case class Ice(val description: String)
-
-  type IceMaker = Juice => Ice
 }
