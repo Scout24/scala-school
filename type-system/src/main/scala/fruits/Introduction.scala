@@ -2,15 +2,16 @@ package fruits
 
 object Introduction {
 
-  makeOrangeJuice(new GroceryStore, new JuiceSqueezer)
+  makeOrangeJuice(new GroceryStore, juiceSqueezer)
+  makeOrangeJuice(new OrganicStore, juiceExtractor)
 
-  makeOrangeJuice(new OrganicStore, new JuiceExtractor)
-
-  def makeOrangeJuice(store: GroceryStore, squeezer: JuiceSqueezer) = {
+  def makeOrangeJuice(store: GroceryStore, squeezer: (CitrusFruit => Juice)) = {
     val orange: Orange = store.getOrange()
-    val juice:  Juice  = squeezer.process(orange)
+    val juice:  Juice  = squeezer(orange)
     juice
   }
+
+  case class Juice(val description: String)
 
   class GroceryStore {
     def getOrange(): Orange = new Orange
@@ -20,16 +21,6 @@ object Introduction {
     override def getOrange(): OrganicOrange = new OrganicOrange
   }
 
-  class JuiceSqueezer {
-    def process(fruit: CitrusFruit): Juice = new Juice(fruit.name + " juice with pulp")
-  }
-
-  class JuiceExtractor extends JuiceSqueezer {
-
-    override def process(fruit: CitrusFruit) = process2(fruit)
-
-    def process2(fruit: Fruit): Juice = new Juice(fruit.name + " juice")
-  }
-
-  case class Juice(val description: String)
+  val juiceExtractor = (f: Fruit)       => new Juice(f.name + " juice")
+  val juiceSqueezer  = (f: CitrusFruit) => new Juice(f.name + " juice with pulp")
 }
