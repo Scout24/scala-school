@@ -1,4 +1,6 @@
-package fruits
+package variance
+
+import fruits.{CitrusFruit, Fruit, Orange, OrganicOrange}
 
 object Introduction {
 
