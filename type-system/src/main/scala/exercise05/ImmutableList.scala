@@ -21,9 +21,9 @@ trait ImmutableList[+A] {
   }
 }
 
-case class ImmutableListEnd[A]() extends ImmutableList[A]
+case class ImmutableListEnd[+A]() extends ImmutableList[A]
 
-case class ImmutableListItem[A](value: A, tail: ImmutableList[A]) extends ImmutableList[A]
+case class ImmutableListItem[+A](value: A, tail: ImmutableList[A]) extends ImmutableList[A]
 
 object ImmutableList {
   def findSimilar[T <: Similar](el: T, list: ImmutableList[T]): Boolean = list match {

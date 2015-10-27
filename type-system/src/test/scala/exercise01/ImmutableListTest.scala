@@ -9,6 +9,6 @@ class ImmutableListTest extends FlatSpec with MustMatchers {
     val orange = new Orange
     val lst: ImmutableList[Orange] = ImmutableListEnd().prepend(orange)
 
-    lst.contains(orange) must be true
+    lst.contains(orange) must be(true)
   }
 }

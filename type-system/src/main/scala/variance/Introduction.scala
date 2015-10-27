@@ -4,6 +4,9 @@ import fruits.{CitrusFruit, Fruit, Orange, OrganicOrange}
 
 object Introduction {
 
+  val juiceExtractor = (f: Fruit)       => new Juice(f.name + " juice")
+  val juiceSqueezer  = (f: CitrusFruit) => new Juice(f.name + " juice with pulp")
+
   makeOrangeJuice(new GroceryStore, juiceSqueezer)
   makeOrangeJuice(new OrganicStore, juiceExtractor)
 
@@ -22,7 +25,4 @@ object Introduction {
   class OrganicStore extends GroceryStore {
     override def getOrange(): OrganicOrange = new OrganicOrange
   }
-
-  val juiceExtractor = (f: Fruit)       => new Juice(f.name + " juice")
-  val juiceSqueezer  = (f: CitrusFruit) => new Juice(f.name + " juice with pulp")
 }
