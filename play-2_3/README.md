@@ -74,13 +74,17 @@ play.modules.enabled += "app.AppModule"
 ###9a. Modify the Thing object to be a class that extends the Something Trait and injects the ApplicationLifecycle
 
 ```
-class Thing @Inject()(lifecycle: ApplicationLifecycle) extends Something
+class Thing @Inject()(playConfig: play.api.Configuration, lifecycle: ApplicationLifecycle) extends Something
 ```
-###9b. Call the start method on instantiation
+###9b. Get the configuration from the playConfig
+```
+val name = playConfig.underlying.getString("thing.name")
+```
+###9c. Call the start method on instantiation
 ```
   this.start()
 ```
-###9c. Add a stop hook that calls the stop method
+###9d. Add a stop hook that calls the stop method
 ```
   lifecycle.addStopHook { () =>
     Future.successful(this.stop())
