@@ -4,7 +4,7 @@
 @()(implicit messages: Messages)
 ```
 
-####2b. Inject the messagesApi into the controller and extend I18nSupport
+####1b. Inject the messagesApi into the controller and extend I18nSupport
 ```
 class Application @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport
 ```
