@@ -1,9 +1,10 @@
-####1. Pass the implicit messages parameter into the view
+## Exercise Part I: Migrating to Play 2.4
+####2a. Pass the implicit messages parameter into the view
 ```
 @()(implicit messages: Messages)
 ```
 
-####2. Inject the messagesApi into the controller and extend I18nSupport
+####2b. Inject the messagesApi into the controller and extend I18nSupport
 ```
 class Application @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport
 ```
@@ -55,7 +56,8 @@ route(FakeRequest(GET, "/boum")) must beSome.which (status(_) == NOT_FOUND)
 </configuration>
 ```
 
-###7. Create the AppModule class in app/app
+## Exercise Part II: Removing Global Settings
+####2a. Create the AppModule class in app/app
 ```
 class AppModule extends AbstractModule {
 
@@ -66,25 +68,25 @@ class AppModule extends AbstractModule {
 }
 ```
 
-###8. Tell the application.conf that we are using an AbstractModule
+####2b. Tell the application.conf that we are using an AbstractModule
 ```
 play.modules.enabled += "app.AppModule"
 ```
 
-###9a. Modify the Thing object to be a class that extends the Something Trait and injects the ApplicationLifecycle
-
+####4a. Modify the Thing object to be a class that extends the Something Trait and injects the ApplicationLifecycle
 ```
 class Thing @Inject()(playConfig: play.api.Configuration, lifecycle: ApplicationLifecycle) extends Something
 ```
-###9b. Get the configuration from the playConfig
+
+####4b. Get the configuration from the playConfig
 ```
 val name = playConfig.underlying.getString("thing.name")
 ```
-###9c. Call the start method on instantiation
+####5. Call the start method on instantiation
 ```
   this.start()
 ```
-###9d. Add a stop hook that calls the stop method
+####6. Add a stop hook that calls the stop method
 ```
   lifecycle.addStopHook { () =>
     Future.successful(this.stop())
