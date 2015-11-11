@@ -1,15 +1,15 @@
 ## Exercise Part I: Migrating to Play 2.4
-####1a. Pass the implicit messages parameter into the view
+####1a. Pass the implicit messages parameter into the view (app/views/index.scala.html)
 ```
 @()(implicit messages: Messages)
 ```
 
-####2b. Inject the messagesApi into the controller and extend I18nSupport
+####2b. Inject the messagesApi into the Application controller and extend I18nSupport
 ```
 class Application @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport
 ```
 
-####2. Tell sbt to use the new injected routes generator
+####2. Tell sbt to use the new injected routes generator in build.sbt
 ```
 routesGenerator := InjectedRoutesGenerator
 ```
