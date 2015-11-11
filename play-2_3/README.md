@@ -20,7 +20,7 @@ libraryDependencies ++= Seq(
   specs2 % Test
 )
 ```
-####3b. Tell sbt where to find its dependencies
+####3b. Tell sbt where to find its dependencies in build.sbt
 ```
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 ```
