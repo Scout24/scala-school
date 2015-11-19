@@ -1,6 +1,6 @@
 package controllers
 
-import actors.GreeterActor
+import actors.BartenderActor
 import akka.actor.ActorSystem
 import com.google.inject.{Singleton, Inject}
 import play.api.mvc._
@@ -9,5 +9,8 @@ import play.api.mvc._
 @Singleton
 class Application @Inject() (system: ActorSystem) extends Controller {
 
-  val greeter = system.actorOf(GreeterActor.props, "greeter-actor")
+  def index = Action {
+    Ok("Your new application is ready.")
+  }
+
 }
