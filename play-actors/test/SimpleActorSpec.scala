@@ -1,9 +1,11 @@
-import akka.actor.{ActorSystem, Props}
+import akka.actor.ActorSystem
 import akka.testkit.{ImplicitSender, TestKit, TestProbe}
 import org.scalatest._
 import simpleActors.BartenderActor.{Hello, Order}
 import simpleActors.CustomerActor.Drink
 import simpleActors.{BartenderActor, CustomerActor}
+
+import scala.concurrent.duration._
 
 class SimpleActorSpec(_system: ActorSystem)
   extends TestKit(_system)
@@ -18,40 +20,39 @@ class SimpleActorSpec(_system: ActorSystem)
     TestKit.shutdownActorSystem(system)
   }
 
+  def timeout = FiniteDuration(5, MILLISECONDS)
+
   "BartenderActor" should "greet new customers" in {
     val bartenderRef = system.actorOf(BartenderActor.props)
 
     bartenderRef ! Hello("Susie")
-    expectMsg("Hello Susie, welcome to Bar Tatsu!")
+    expectMsg(timeout, "Hello Susie, welcome to Bar Tatsu!")
   }
 
   "BartenderActor" should "respond to an order" in {
     val bartenderRef = system.actorOf(BartenderActor.props)
 
     bartenderRef ! Order("Caipirinha")
-    expectMsgAllOf("Here's your Caipirinha", Drink("Caipirinha"))
-//    expectMsg("Here's your Caipirinha")
-//    expectMsg(Drink("Caipirinha"))
+    expectMsgAllOf(timeout, "Here's your Caipirinha", Drink("Caipirinha"))
   }
 
   "CustomerActor" should "say thank you for the drink" in {
     val customerRef = system.actorOf(CustomerActor.props)
 
     customerRef ! Drink("Caipirinha")
-    expectMsg("Thanks for the Caipirinha!")
+    expectMsg(timeout, "Thanks for the Caipirinha!")
   }
 
   "Customer and bartender" should "interact" in {
     val dave = system.actorOf(BartenderActor.props, "dave")
     val julia = TestProbe()
-    val juliaActor = system.actorOf(Props(julia.getClass))
 
-    dave.tell(Hello("julia"), juliaActor)
-    julia.expectMsg("Hello julia, welcome to Bar Tatsu!")
+    dave.tell(Hello("julia"), julia.ref)
+    julia.expectMsg(timeout, "Hello julia, welcome to Bar Tatsu!")
 
-    dave.tell(Order("white wine"), juliaActor)
-    julia.expectMsg("Here's your Caipirinha")
-    julia.expectMsg(Drink("Caipirinha"))
+    dave.tell(Order("white wine"), julia.ref)
+    julia.expectMsg(timeout, "Here's your white wine")
+    julia.expectMsg(timeout, Drink("white wine"))
 
   }
 }

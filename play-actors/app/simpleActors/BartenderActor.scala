@@ -13,11 +13,5 @@ object BartenderActor {
 class BartenderActor extends Actor {
   import BartenderActor._
 
-  def receive = {
-    case Hello(name: String) =>
-      sender() ! s"Hello $name, welcome to Bar Tatsu!"
-    case Order(drink: String) =>
-      sender() ! s"Here's your $drink"
-      sender() ! Drink(drink)
-  }
+  def receive = ???
 }

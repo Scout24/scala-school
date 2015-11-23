@@ -11,9 +11,6 @@ object CustomerActor {
 class CustomerActor extends Actor {
   import CustomerActor._
 
-  def receive = {
-    case Drink(drink: String) =>
-      sender() ! s"Thanks for the $drink!"
-  }
+  def receive = ???
 }
 
