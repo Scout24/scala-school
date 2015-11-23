@@ -8,7 +8,7 @@ import scala.concurrent.Future
 object BossActor {
   def props = Props[BossActor]
 
-  case class ApproveEntry(age: Int, name: String)
+  case class ApproveEntry(name: String, age: Int)
   case class OpenBar(regulars: List[String])
 }
 
@@ -17,7 +17,7 @@ class BossActor extends Actor {
 
   def receive = {
     case OpenBar(regulars) => sender ! context.actorOf(BartenderActor.props(regulars))
-    case ApproveEntry(age: Int, name: String) =>
+    case ApproveEntry(name: String, age: Int) =>
       sender() ! (if(age > 17) EntryApproved(name) else EntryDenied(name))
   }
 }

@@ -1,6 +1,6 @@
 package slightlyMoreComplexActors
 
-import akka.actor.{ActorRef, Actor, Props}
+import akka.actor.{PoisonPill, ActorRef, Actor, Props}
 
 import scala.language.postfixOps
 import scala.concurrent.duration._
@@ -35,11 +35,13 @@ class CustomerActor(name: String, age: Int, favouriteDrink: String, bartender: A
   }
 
   def entering: Receive = {
-    case Welcome() => {
+    case Welcome => {
       bartender ! Order(favouriteDrink)
       context.become(drinking)
     }
-    case Sorry() => context.stop(self)
+    case Sorry => {
+      context.stop(self)
+    }
   }
 
   def receive = entering
