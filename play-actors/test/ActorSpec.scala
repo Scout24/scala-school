@@ -40,7 +40,7 @@ class ActorSpec(_system: ActorSystem)
     expectMsg("Thanks for the Caipirinha!")
   }
 
-  "Customer and bartender" should "interact" ignore {
+  "Customer and bartender" should "interact" in {
     val dave = system.actorOf(BartenderActor.props, "dave")
     val julia = TestProbe()
     val juliaActor = system.actorOf(Props(julia.getClass))
