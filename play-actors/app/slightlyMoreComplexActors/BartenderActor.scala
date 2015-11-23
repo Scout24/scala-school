@@ -1,10 +1,10 @@
 package slightlyMoreComplexActors
 
-import slightlyMoreComplexActors.CustomerActor.Drink
+import slightlyMoreComplexActors.CustomerActor.{Sorry, Welcome, Drink}
 import akka.actor.{ActorRef, Actor, Props}
 
 object BartenderActor {
-  def props = Props[BartenderActor]
+  def props(regulars: List[String]) = Props(classOf[BartenderActor], regulars)
 
   case class Hello(name: String, age: Int)  
   case class Order(drink: String)
@@ -12,28 +12,27 @@ object BartenderActor {
   case class EntryDenied(name: String)
 }
 
-class BartenderActor extends Actor {
+class BartenderActor(regulars: List[String]) extends Actor {
   import BartenderActor._
   import BossActor._
 
-  def receive = servingDrinks(Nil)
+  def receive = servingDrinks(regulars)
 
   def servingDrinks(approved: List[String]) : Receive = {
     case Hello(name: String, age: Int) =>
-      if(approved contains name) sender() ! s"Hello $name, welcome to Bar Tatsu!"
+      if(approved contains name) sender() ! Welcome
       else {
         context.parent ! ApproveEntry(age, name)
         context.become(awaitingApproval(approved, sender))
       }
     case Order(drink: String) =>
-      sender() ! s"Here's your $drink"
       sender() ! Drink(drink)
   }
 
   def awaitingApproval(approved: List[String], customer: ActorRef) : Receive = {
     case EntryApproved(name) => context.become(servingDrinks(name :: approved))
     case EntryDenied(name) => {
-      customer !
+      customer ! Sorry
       context.become(servingDrinks(approved))
     }
   }
