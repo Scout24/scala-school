@@ -29,7 +29,9 @@ class CustomerActor(name: String, age: Int, favouriteDrink: String, bartender: A
     case DrinkFinished() => ???
   }
 
-  def entering: Receive = ???
+  def entering: Receive = {
+    case _ => ???
+  }
 
   def receive = entering
 }
