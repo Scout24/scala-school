@@ -1,4 +1,4 @@
-import actors.BartenderActor.{Order, Welcome}
+import actors.BartenderActor.{Hello, Order}
 import actors.CustomerActor.Drink
 import actors.{BartenderActor, CustomerActor}
 import akka.actor.{Props, ActorSystem}
@@ -21,7 +21,7 @@ class ActorSpec(_system: ActorSystem)
   "BartenderActor" should "greet new customers" in {
     val bartenderRef = system.actorOf(BartenderActor.props)
 
-    bartenderRef ! Welcome("Susie")
+    bartenderRef ! Hello("Susie", 36)
     expectMsg("Hello Susie, welcome to Bar Tatsu!")
   }
 
@@ -34,7 +34,7 @@ class ActorSpec(_system: ActorSystem)
   }
 
   "CustomerActor" should "say thank you for the drink" in {
-    val customerRef = system.actorOf(CustomerActor.props)
+    val customerRef = system.actorOf(CustomerActor.props("Arif", 31, "Mojito", system.actorOf(BartenderActor.props)))
 
     customerRef ! Drink("Caipirinha")
     expectMsg("Thanks for the Caipirinha!")
@@ -45,7 +45,7 @@ class ActorSpec(_system: ActorSystem)
     val julia = TestProbe()
     val juliaActor = system.actorOf(Props(julia.getClass))
 
-    dave.tell(Welcome("julia"), juliaActor)
+    dave.tell(Hello("julia", 22), juliaActor)
     julia.expectMsg("Hello julia, welcome to Bar Tatsu!")
 
     dave.tell(Order("white wine"), juliaActor)
