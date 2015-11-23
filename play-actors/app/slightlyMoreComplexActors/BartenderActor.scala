@@ -18,26 +18,8 @@ class BartenderActor(regulars: List[String]) extends Actor {
 
   def receive = servingDrinks(regulars)
 
-  def servingDrinks(approved: List[String]) : Receive = {
-    case Hello(name: String, age: Int) =>
-      if(approved contains name) sender() ! Welcome
-      else {
-        context.parent ! ApproveEntry(name, age)
-        context.become(awaitingApproval(approved, sender))
-      }
-    case Order(drink: String) =>
-      sender() ! Drink(drink)
-  }
+  def servingDrinks(approved: List[String]): Receive = ???
 
-  def awaitingApproval(approved: List[String], customer: ActorRef) : Receive = {
-    case EntryApproved(name) => {
-      customer ! Welcome
-      context.become(servingDrinks(name :: approved))
-    }
-    case EntryDenied(name) => {
-      customer ! Sorry
-      context.become(servingDrinks(approved))
-    }
-  }
+  def awaitingApproval(approved: List[String], customer: ActorRef): Receive = ???
 
 }

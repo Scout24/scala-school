@@ -17,7 +17,6 @@ class BossActor extends Actor {
 
   def receive = {
     case OpenBar(regulars) => sender ! context.actorOf(BartenderActor.props(regulars))
-    case ApproveEntry(name: String, age: Int) =>
-      sender() ! (if(age > 17) EntryApproved(name) else EntryDenied(name))
+    case ApproveEntry(name: String, age: Int) => ???
   }
 }

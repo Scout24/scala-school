@@ -3,15 +3,14 @@ import slightlyMoreComplexActors.BartenderActor.{EntryDenied, EntryApproved, Hel
 import slightlyMoreComplexActors.BossActor.{ApproveEntry, OpenBar}
 import slightlyMoreComplexActors.CustomerActor.{Sorry, Welcome, Drink}
 import slightlyMoreComplexActors.{BossActor, BartenderActor, CustomerActor}
-import akka.actor.{PoisonPill, ActorRef, Props, ActorSystem}
+import akka.actor.{ActorRef, ActorSystem}
 import akka.testkit.{TestActorRef, TestProbe, ImplicitSender, TestKit}
 import org.scalatest._
 import akka.pattern.ask
 import scala.language.postfixOps
 import scala.concurrent.duration._
 
-
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Await
 
 class SlightlyMoreComplexActorSpec(_system: ActorSystem)
   extends TestKit(_system)
@@ -24,6 +23,13 @@ class SlightlyMoreComplexActorSpec(_system: ActorSystem)
 
   override def afterAll: Unit = {
     TestKit.shutdownActorSystem(system)
+  }
+
+  "CustomerActor" should "say hello to the bartender" in {
+    val bartender = TestProbe()
+    val customerRef = system.actorOf(CustomerActor.props("Arif", 31, "Mojito", bartender.ref))
+
+    bartender.expectMsg(Hello("Arif", 31))
   }
 
   "BartenderActor" should "greet and serve regulars" in {
@@ -58,13 +64,6 @@ class SlightlyMoreComplexActorSpec(_system: ActorSystem)
     expectMsg(EntryDenied("David"))
   }
 
-  "CustomerActor" should "say hello to the bartender" in {
-    val bartender = TestProbe()
-    val customerRef = system.actorOf(CustomerActor.props("David", 16, "Vodka Red Bull", bartender.ref))
-
-    bartender.expectMsg(Hello("David", 16))
-  }
-
   "CustomerActor" should "start drinking when entrance is granted" in {
     val bartender = TestProbe()
     val customerRef = system.actorOf(CustomerActor.props("Matt", 29, "Espresso Martini", bartender.ref))
@@ -93,6 +92,4 @@ class SlightlyMoreComplexActorSpec(_system: ActorSystem)
     bartenderRef ! Hello("David", 16)
     expectMsg(Sorry)
   }
-
-
 }

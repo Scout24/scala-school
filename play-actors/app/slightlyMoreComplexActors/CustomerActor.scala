@@ -1,6 +1,6 @@
 package slightlyMoreComplexActors
 
-import akka.actor.{PoisonPill, ActorRef, Actor, Props}
+import akka.actor.{ActorRef, Actor, Props}
 
 import scala.language.postfixOps
 import scala.concurrent.duration._
@@ -21,28 +21,15 @@ class CustomerActor(name: String, age: Int, favouriteDrink: String, bartender: A
   import BartenderActor._
 
   override def preStart {
-    bartender ! Hello(name, age)
+    ???
   }
 
   def drinking: Receive = {
-    case Drink(drink: String) => {
-      sender() ! s"Thanks for the $drink!"
-      context.system.scheduler.scheduleOnce(100 milliseconds, self, DrinkFinished)
-    }
-    case DrinkFinished() => {
-      bartender ! Order(favouriteDrink)
-    }
+    case Drink(drink: String) => ???
+    case DrinkFinished() => ???
   }
 
-  def entering: Receive = {
-    case Welcome => {
-      bartender ! Order(favouriteDrink)
-      context.become(drinking)
-    }
-    case Sorry => {
-      context.stop(self)
-    }
-  }
+  def entering: Receive = ???
 
   def receive = entering
 }
