@@ -19,11 +19,13 @@ class BartenderActor(regulars: List[String]) extends Actor {
   def receive = servingDrinks(regulars)
 
   def servingDrinks(approved: List[String]): Receive = {
-    case _ => ???
+    case Hello(name, age) => ???
+    case Order(drink) => ???
   }
 
   def awaitingApproval(approved: List[String], customer: ActorRef): Receive = {
-    case _ => ???
+    case EntryApproved(name) => ???
+    case EntryDenied(name) => ???
   }
 
 }

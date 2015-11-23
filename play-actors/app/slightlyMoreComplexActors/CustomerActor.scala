@@ -25,12 +25,16 @@ class CustomerActor(name: String, age: Int, favouriteDrink: String, bartender: A
   }
 
   def drinking: Receive = {
-    case Drink(drink: String) => ???
-    case DrinkFinished() => ???
+    case Drink(drink: String) => context.system.scheduler.scheduleOnce(100 milliseconds, self, DrinkFinished)
+    case DrinkFinished() => bartender ! Order(favouriteDrink)
   }
 
   def entering: Receive = {
-    case _ => ???
+    case Welcome => {
+      bartender ! ???
+      context.become(drinking)
+    }
+    case Sorry => ???
   }
 
   def receive = entering
