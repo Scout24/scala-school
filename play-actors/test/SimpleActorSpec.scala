@@ -1,18 +1,18 @@
-import actors.BartenderActor.{Hello, Order}
-import actors.CustomerActor.Drink
-import actors.{BartenderActor, CustomerActor}
-import akka.actor.{Props, ActorSystem}
-import akka.testkit.{TestProbe, ImplicitSender, TestKit}
+import akka.actor.{ActorSystem, Props}
+import akka.testkit.{ImplicitSender, TestKit, TestProbe}
 import org.scalatest._
+import simpleActors.BartenderActor.{Hello, Order}
+import simpleActors.CustomerActor.Drink
+import simpleActors.{BartenderActor, CustomerActor}
 
-class ActorSpec(_system: ActorSystem)
+class SimpleActorSpec(_system: ActorSystem)
   extends TestKit(_system)
   with ImplicitSender
   with FlatSpecLike
   with MustMatchers
   with BeforeAndAfterAll {
 
-  def this() = this(ActorSystem("GreeterActorTest"))
+  def this() = this(ActorSystem("SimpleActorTest"))
 
   override def afterAll: Unit = {
     TestKit.shutdownActorSystem(system)
@@ -21,7 +21,7 @@ class ActorSpec(_system: ActorSystem)
   "BartenderActor" should "greet new customers" in {
     val bartenderRef = system.actorOf(BartenderActor.props)
 
-    bartenderRef ! Hello("Susie", 36)
+    bartenderRef ! Hello("Susie")
     expectMsg("Hello Susie, welcome to Bar Tatsu!")
   }
 
@@ -29,12 +29,13 @@ class ActorSpec(_system: ActorSystem)
     val bartenderRef = system.actorOf(BartenderActor.props)
 
     bartenderRef ! Order("Caipirinha")
-    expectMsg("Here's your Caipirinha")
-    expectMsg(Drink("Caipirinha"))
+    expectMsgAllOf("Here's your Caipirinha", Drink("Caipirinha"))
+//    expectMsg("Here's your Caipirinha")
+//    expectMsg(Drink("Caipirinha"))
   }
 
   "CustomerActor" should "say thank you for the drink" in {
-    val customerRef = system.actorOf(CustomerActor.props("Arif", 31, "Mojito", system.actorOf(BartenderActor.props)))
+    val customerRef = system.actorOf(CustomerActor.props)
 
     customerRef ! Drink("Caipirinha")
     expectMsg("Thanks for the Caipirinha!")
@@ -45,13 +46,12 @@ class ActorSpec(_system: ActorSystem)
     val julia = TestProbe()
     val juliaActor = system.actorOf(Props(julia.getClass))
 
-    dave.tell(Hello("julia", 22), juliaActor)
+    dave.tell(Hello("julia"), juliaActor)
     julia.expectMsg("Hello julia, welcome to Bar Tatsu!")
 
     dave.tell(Order("white wine"), juliaActor)
     julia.expectMsg("Here's your Caipirinha")
     julia.expectMsg(Drink("Caipirinha"))
-//    expectMsg("Thanks for the Caipirinha!")
 
   }
 }

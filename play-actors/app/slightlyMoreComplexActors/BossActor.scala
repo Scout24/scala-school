@@ -1,6 +1,6 @@
-package actors
+package slightlyMoreComplexActors
 
-import actors.BartenderActor.{EntryDenied, EntryApproved}
+import slightlyMoreComplexActors.BartenderActor.{EntryDenied, EntryApproved}
 import akka.actor.{Props, Actor}
 
 object BossActor {

@@ -1,6 +1,6 @@
-package actors
+package slightlyMoreComplexActors
 
-import actors.CustomerActor.Drink
+import slightlyMoreComplexActors.CustomerActor.Drink
 import akka.actor.{ActorRef, Actor, Props}
 
 object BartenderActor {
