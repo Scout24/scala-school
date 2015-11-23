@@ -44,10 +44,10 @@ class SimpleActorSpec(_system: ActorSystem)
   }
 
   "Customer and bartender" should "interact" in {
-    val dave = system.actorOf(BartenderActor.props, "dave")
+    val dave = system.actorOf(BartenderActor.props, "Dave")
     val julia = TestProbe()
 
-    dave.tell(Hello("julia"), julia.ref)
+    dave.tell(Hello("Julia"), julia.ref)
     julia.expectMsg(timeout, "Hello julia, welcome to Bar Tatsu!")
 
     dave.tell(Order("white wine"), julia.ref)
