@@ -1,6 +1,7 @@
 package slightlyMoreComplexActors
 
 import akka.actor.{ActorRef, Actor, Props}
+import akka.pattern._
 
 import scala.language.postfixOps
 import scala.concurrent.duration._
