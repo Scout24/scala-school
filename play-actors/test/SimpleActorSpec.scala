@@ -48,7 +48,7 @@ class SimpleActorSpec(_system: ActorSystem)
     val julia = TestProbe()
 
     dave.tell(Hello("Julia"), julia.ref)
-    julia.expectMsg(timeout, "Hello julia, welcome to Bar Tatsu!")
+    julia.expectMsg(timeout, "Hello Julia, welcome to Bar Tatsu!")
 
     dave.tell(Order("white wine"), julia.ref)
     julia.expectMsg(timeout, "Here's your white wine")
