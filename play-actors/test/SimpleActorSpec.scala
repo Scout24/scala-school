@@ -22,14 +22,14 @@ class SimpleActorSpec(_system: ActorSystem)
 
   def timeout = FiniteDuration(5, MILLISECONDS)
 
-  "BartenderActor" should "greet new customers" in {
+  "BartenderActor" should "greet customers when they arrive" in {
     val bartenderRef = system.actorOf(BartenderActor.props)
 
     bartenderRef ! Hello("Susie")
     expectMsg(timeout, "Hello Susie, welcome to Bar Tatsu!")
   }
 
-  "BartenderActor" should "respond to an order" in {
+  "BartenderActor" should "serve the customer's order" in {
     val bartenderRef = system.actorOf(BartenderActor.props)
 
     bartenderRef ! Order("Caipirinha")
