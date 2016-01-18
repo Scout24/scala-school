@@ -15,6 +15,6 @@ object Types extends App {
 
   contact match {
     case PrivateSeller(_, _) =>
-    // case Dealer(_, _) =>
+    case Dealer(_, _) =>
   }
 }
