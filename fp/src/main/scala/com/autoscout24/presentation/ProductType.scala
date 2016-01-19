@@ -1,4 +1,4 @@
-package com.autoscout24
+package com.autoscout24.presentation
 
 final case class ClutchPedal(serialNumber: String)
 final case class GasPedal(serialNumber: String)

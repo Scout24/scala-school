@@ -1,4 +1,5 @@
-package com.autoscout24
+package com.autoscout24.presentation
+
 import java.util.Date
 
 trait Json {

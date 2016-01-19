@@ -1,4 +1,4 @@
-package com.autoscout24
+package com.autoscout24.presentation
 
 sealed trait Vehicle {
   val serialNumber: String
