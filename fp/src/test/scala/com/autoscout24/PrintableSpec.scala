@@ -34,7 +34,7 @@ class PrintableSpec extends WordSpec with MustMatchers {
 
     "add an implicit print method to cat" in {
       val mittens = new Cat("Mittens", 10, "black and white")
-      mittens.print must be("Mittens is a 10 year-old black and white cat")
+      mittens.print must be("Mittens is a 10 year-old black and white cat.")
     }
 
   }
