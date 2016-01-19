@@ -1,6 +1,7 @@
 package com.autoscout24
 
 import org.scalatest.{MustMatchers, WordSpec}
+import PrintDefaults._
 
 class PrintableSpec extends WordSpec with MustMatchers {
 
