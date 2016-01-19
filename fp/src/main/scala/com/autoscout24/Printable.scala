@@ -16,12 +16,24 @@ object PrintDefaults {
     def format(value: Int): String = ???
   }
 
+  implicit val printableCat = new Printable[Cat] {
+    def format(value: Cat): String = ???
+  }
+
 }
 
 object Print {
 
   def format[A](value: A)(implicit printable: Printable[A]): String = ???
 
-  def print[A](value: A)(implicit printable: Printable[A]): Unit = ???
+}
+
+object PrintSyntax {
+
+  implicit class PrintOps[A](value: A) {
+
+    def format(implicit printable: Printable[A]): String = ???
+
+  }
 
 }
