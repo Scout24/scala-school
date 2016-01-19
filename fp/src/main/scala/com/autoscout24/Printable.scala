@@ -1,9 +1,7 @@
 package com.autoscout24
 
 trait Printable[A] {
-
   def format(value: A): String
-
 }
 
 object PrintDefaults {
@@ -32,7 +30,7 @@ object PrintSyntax {
 
   implicit class PrintOps[A](value: A) {
 
-    def format(implicit printable: Printable[A]): String = ???
+    def print(implicit printable: Printable[A]): String = ???
 
   }
 
