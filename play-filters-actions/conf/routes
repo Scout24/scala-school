@@ -4,11 +4,3 @@
 
 # Home page
 GET        /                             controllers.Application.index
-GET        /circumference                controllers.Application.invalid
-GET        /circumference/:r             controllers.Application.circumference(r: Double)
-
-# Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
-
-GET        /diagnostics/exception        controllers.Diagnostics.exceptionCheck
-GET        /diagnostics/heartbeat        controllers.Diagnostics.heartbeatCheck
