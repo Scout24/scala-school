@@ -1,15 +1,14 @@
 package controllers
 
-import models.Calculator
-import play.api._
-import play.api.mvc._
-import play.twirl.api.Html
-import views.html.resultPage
+import javax.inject.Inject
 
-class Application extends Controller {
+import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.mvc._
+
+class Application @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok
   }
 
   //TODO add your controller methods here
