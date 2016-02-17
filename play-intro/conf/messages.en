@@ -1,1 +1,1 @@
-circumference.result=The circumference of a circle with radius {0} is {1}
+circumference.result=The circumference of a circle with radius {0,number} is {1,number,#.###############}

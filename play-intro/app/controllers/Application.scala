@@ -7,9 +7,7 @@ import play.api.mvc._
 
 class Application @Inject()(implicit val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
-  def index = Action {
-    Ok
-  }
+  def index = Action(Ok)
 
   //TODO add your controller methods here
 

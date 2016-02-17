@@ -3,7 +3,7 @@ package unit
 import models.Calculator
 import org.specs2.mutable.Specification
 
-class CalculatorSpecPlus extends Specification {
+class CalculatorSpec extends Specification {
 
   "Calculator" should {
 
