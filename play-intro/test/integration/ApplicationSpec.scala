@@ -3,6 +3,7 @@ package integration
 import org.junit.runner._
 import org.specs2.mutable._
 import org.specs2.runner._
+import play.api.mvc.AnyContentAsEmpty
 import play.api.test.Helpers._
 import play.api.test._
 
@@ -33,7 +34,8 @@ class ApplicationSpec extends Specification {
     }
 
     "render a result page with the calculated circumference" in new WithApplication{
-      val circ = route(FakeRequest(GET, "/circumference/2")).get
+      val headers = FakeHeaders(Seq("Accept-Language" -> "en"))
+      val circ = route(FakeRequest(GET, "/circumference/2", headers, AnyContentAsEmpty)).get
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "text/html")
@@ -41,7 +43,8 @@ class ApplicationSpec extends Specification {
     }
 
     "render a german result page with the calculated circumference" in new WithApplication{
-      val circ = route(FakeRequest(GET, "/circumference/2?language=de")).get
+      val headers = FakeHeaders(Seq("Accept-Language" -> "de"))
+      val circ = route(FakeRequest(GET, "/circumference/2", headers, AnyContentAsEmpty)).get
 
       status(circ) must equalTo(OK)
       contentType(circ) must beSome.which(_ == "text/html")
