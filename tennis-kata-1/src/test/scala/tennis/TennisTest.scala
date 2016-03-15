@@ -29,6 +29,12 @@ class TennisTest(params: TennisTestCase) {
     checkAllScores(game)
   }
 
+  @Test
+  def checkAllScoresTennisGame2() {
+    val game = new TennisGame2("player1", "player2")
+    checkAllScores(game)
+  }
+
 }
 
 object TennisTest {
