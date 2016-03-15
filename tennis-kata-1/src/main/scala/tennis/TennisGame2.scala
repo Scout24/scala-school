@@ -4,128 +4,96 @@ package tennis
 
 class TennisGame2 (val player1Name : String, val player2Name : String) extends TennisGame {
 
-  var P1point = 0
-  var P2point  = 0
+  var p1point = 0
+  var p2point = 0
 
-  var P1res = ""
-  var P2res = ""
+  var p1res = ""
+  var p2res = ""
 
+  // Sort this out...
   def calculateScore() : String = {
+    // Consider making this a large match
+    // where we do not mutate score but return value
+    // probably have to create helpers too?
     var score = ""
-    if (P1point == P2point && P1point < 4)
+
+    if (p1point == p2point && p1point < 4)
     {
-      if (P1point==0)
-        score = "Love"
-      if (P1point==1)
-        score = "Fifteen"
-      if (P1point==2)
-        score = "Thirty"
-      score += "-All"
+      score = (p1point match {
+        case 0 => "Love"
+        case 1 => "Fifteen"
+        case 2 => "Thirty"
+        case 3 => "Forty"
+      }) + "-All"
     }
-    if (P1point==P2point && P1point>=3)
+    if (p1point==p2point && p1point>=3)
       score = "Deuce"
 
-    if (P1point > 0 && P2point==0)
+    if (p1point > 0 && p2point==0)
     {
-      if (P1point==1)
-        P1res = "Fifteen"
-      if (P1point==2)
-        P1res = "Thirty"
-      if (P1point==3)
-        P1res = "Forty"
+      p1res = intToString(p1point)
 
-      P2res = "Love"
-      score = P1res + "-" + P2res
+      p2res = intToString(p2point)
+      score = p1res + "-" + p2res
     }
-    if (P2point > 0 && P1point==0)
+    if (p2point > 0 && p1point==0)
     {
-      if (P2point==1)
-        P2res = "Fifteen"
-      if (P2point==2)
-        P2res = "Thirty"
-      if (P2point==3)
-        P2res = "Forty"
+      p2res = intToString(p2point)
 
-      P1res = "Love"
-      score = P1res + "-" + P2res
+      p1res = intToString(p1point)
+      score = p1res + "-" + p2res
     }
 
-    if (P1point>P2point && P1point < 4)
+    if (p1point>p2point && p1point < 4)
     {
-      if (P1point==2)
-        P1res="Thirty"
-      if (P1point==3)
-        P1res="Forty"
-      if (P2point==1)
-        P2res="Fifteen"
-      if (P2point==2)
-        P2res="Thirty"
-      score = P1res + "-" + P2res
+        p1res=intToString(p1point)
+        p2res=intToString(p2point)
+      score = p1res + "-" + p2res
     }
-    if (P2point>P1point && P2point < 4)
+    if (p2point>p1point && p2point < 4)
     {
-      if (P2point==2)
-        P2res="Thirty"
-      if (P2point==3)
-        P2res="Forty"
-      if (P1point==1)
-        P1res="Fifteen"
-      if (P1point==2)
-        P1res="Thirty"
-      score = P1res + "-" + P2res
+      p1res=intToString(p1point)
+      p2res=intToString(p2point)
+      score = p1res + "-" + p2res
     }
 
-    if (P1point > P2point && P2point >= 3)
+    if (p1point > p2point && p2point >= 3)
     {
       score = "Advantage player1"
     }
 
-    if (P2point > P1point && P1point >= 3)
+    if (p2point > p1point && p1point >= 3)
     {
       score = "Advantage player2"
     }
 
-    if (P1point>=4 && P2point>=0 && (P1point-P2point)>=2)
+    if (p1point>=4 && p2point>=0 && (p1point-p2point)>=2)
     {
       score = "Win for player1"
     }
-    if (P2point>=4 && P1point>=0 && (P2point-P1point)>=2)
+    if (p2point>=4 && p1point>=0 && (p2point-p1point)>=2)
     {
       score = "Win for player2"
     }
     return score
   }
 
-  def SetP1Score(number : Int) {
-
-    for (i <- 0 until number by 1)
-    {
-      P1Score()
+  def intToString(point:Int): String  = {
+    point match {
+      case 0 => "Love"
+      case 1 => "Fifteen"
+      case 2 => "Thirty"
+      case 3 => "Forty"
+      case _ => ""
     }
-
-  }
-
-  def SetP2Score(number : Int){
-
-    for (i <- 0 until number by 1)
-    {
-      P2Score()
-    }
-
-  }
-
-  def P1Score(){
-    P1point += 1
-  }
-
-  def P2Score(){
-    P2point +=1
   }
 
   def wonPoint(player : String) {
-    if (player == "player1")
-      P1Score()
-    else
-      P2Score()
+    if (player == player1Name) {
+      p1point += 1
+    }
+    else {
+      p2point += 1
+    }
   }
 }

@@ -74,7 +74,7 @@ object App extends App {
     import HigherKindedEqualsOps._
 
     Option(227) === Option(HexNumeral("0xE3"))
-
+    Option(227).===(Option(HexNumeral("0xE3")))
     // is the same as
 
     Option(227).eql(Option(HexNumeral("0xE3")))
