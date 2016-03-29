@@ -14,5 +14,9 @@ package object autoscout24 {
 
     override def combine(x: Order, y: Order): Order = Order(x.cost + y.cost, x.quantity + y.quantity)
   }
+
+  import cats.std.function._
+  import cats.syntax.functor._
+
 }
 
