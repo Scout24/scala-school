@@ -5,7 +5,7 @@ import cats.Monoid
 import cats.std.int._
 import cats.std.option._
 
-class SuperAdderSpec extends Specification  { def is = s2"""
+class MonoidSpec extends Specification  { def is = s2"""
 
   This is a specification to check add function
 
