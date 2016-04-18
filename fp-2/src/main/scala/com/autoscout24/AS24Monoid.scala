@@ -10,4 +10,5 @@ object AS24MonoidTest extends App {
   val helloWorld = "Hello " |+| "world" |+| Monoid[String].empty
 
   val three = 1 |+| 2 |+| Monoid[Int].empty
+
 }
