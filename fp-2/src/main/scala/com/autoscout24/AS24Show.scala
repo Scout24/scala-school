@@ -2,8 +2,10 @@ package com.autoscout24
 import cats.Show
 import cats.syntax.show._
 
-// cats. - type classes
-// cats.std. - type classes instances for type
+// trait Show[T] {
+//  def show(f: T): String
+// }
+
 final case class ClutchPedal(serialNumber: String)
 final case class GasPedal(serialNumber: String)
 

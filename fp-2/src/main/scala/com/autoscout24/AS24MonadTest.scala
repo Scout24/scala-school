@@ -11,4 +11,8 @@ object AS24MonadTest extends App {
 
   val list1 = Monad[List].pure(1)
   val list2 = list1 flatMap {a => Monad[List].pure(a + 1)}
+
+
+  val tupled: Option[(Int, String, Double)] = Monad[Option].tuple3 (Option(1), Option("hi"), Option(3.0))
+  val sequence: Option[List[Int]] = Monad[Option].sequence (List(Option(1), Option(2), Option(3)))
 }
