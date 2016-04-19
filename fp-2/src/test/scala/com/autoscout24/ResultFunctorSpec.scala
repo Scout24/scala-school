@@ -1,10 +1,9 @@
 package com.autoscout24
 
-import org.specs2.Specification
-
 import cats.syntax.functor._
-import com.autoscout24.Result._
 import com.autoscout24.DefaultResultFunctor._
+import com.autoscout24.Result._
+import org.specs2.Specification
 
 class ResultFunctorSpec extends Specification { def is = s2"""
 

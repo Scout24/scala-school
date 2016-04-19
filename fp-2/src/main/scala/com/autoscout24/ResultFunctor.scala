@@ -22,11 +22,6 @@ object DefaultResultFunctor {
   import Result._
 
   implicit val resultFunctor: Functor[Result] = new Functor[Result] {
-    override def map[A, B](fa: Result[A])(f: (A) => B): Result[B] =
-      fa match {
-        case Success(value) => succ(f(value))
-        case Warning(value, message) => warn(f(value), message)
-        case Failure(message) => fail(message)
-      }
+    override def map[A, B](fa: Result[A])(f: (A) => B): Result[B] = ???
   }
 }

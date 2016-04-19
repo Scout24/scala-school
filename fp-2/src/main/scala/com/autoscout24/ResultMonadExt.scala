@@ -24,14 +24,6 @@ object DefaultResultMonad {
   implicit val resultMonad: Monad[ResultExt] = new Monad[ResultExt] {
     override def pure[A](x: A): ResultExt[A] = succ(x)
 
-    override def flatMap[A, B](fa: ResultExt[A])(f: (A) => ResultExt[B]): ResultExt[B] = fa match {
-      case SuccessExt(value) => f(value)
-      case WarningExt(value, message1) => f(value) match {
-        case SuccessExt(value) => warn(value, message1)
-        case WarningExt(value, message2) => warn(value, s"$message1 $message2")
-        case FailureExt(message2) => fail(s"$message1 $message2")
-      }
-      case FailureExt(message) => fail(message)
-    }
+    override def flatMap[A, B](fa: ResultExt[A])(f: (A) => ResultExt[B]): ResultExt[B] = ???
   }
 }
