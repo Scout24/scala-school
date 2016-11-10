@@ -298,6 +298,17 @@ words -- Seq(1, 2)         // ↪ Map(3 -> three)
 ```
 </script></section>
 
+<section data-markdown><script type="text/template">
+### read the collections api
+
+Especially [Traversable](http://www.scala-lang.org/api/2.11.8/#scala.collection.Traversable)
+offers many helpful methods
+
+- collect, collectFirst
+- count, groupBy, orderBy
+- take, takeWhile, drop, dropWhile
+- exists, forall
+</script></section>
 
 <section data-markdown><script type="text/template">
 ### For-Comprehension
@@ -327,20 +338,6 @@ for (s <- Seq("1", "2", "3")) println(s)
 // ⇝ 2
 // ⇝ 3
 ```
-</script></section>
-
-<section data-markdown><script type="text/template">
-### read the collections api
-
-Especially [Traversable](http://www.scala-lang.org/api/2.11.8/#scala.collection.Traversable)
-offers many helpful methods
-
-- collect, collectFirst
-- count, groupBy, orderBy
-- take, takeWhile, drop, dropWhile
-- exists, forall
-
-
 </script></section>
 
 <section data-markdown><script type="text/template">
